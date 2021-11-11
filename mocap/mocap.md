@@ -6,7 +6,7 @@ has_children: true
 has_toc: false
 ---
 
-# Solutions
+# 运动捕捉
 {: .no_toc }
 
 1. TOC

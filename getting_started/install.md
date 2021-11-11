@@ -1,11 +1,11 @@
 ---
 layout: default
-title: Installation
+title: 安装
 parent: 快速开始
 nav_order: 1
 ---
 
-# Installation
+# 安装
 {: .no_toc }
 
 1. TOC
