@@ -1,7 +1,7 @@
 ---
 layout: default
 title: 数据格式
-parent: Getting Started
+parent: 快速开始
 nav_order: 3
 ---
 

@@ -1,7 +1,7 @@
 ---
 layout: default
 title: 预处理
-parent: Getting Started
+parent: 快速开始
 nav_order: 2
 ---
 

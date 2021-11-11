@@ -1,7 +1,7 @@
 ---
 layout: default
 title: 多视角多人姿态估计
-parent: Solutions
+parent: 运动捕捉
 nav_order: 3
 ---
 

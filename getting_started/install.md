@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Installation
-parent: Getting Started
+parent: 快速开始
 nav_order: 1
 ---
 

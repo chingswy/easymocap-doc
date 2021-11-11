@@ -1,11 +1,11 @@
 ---
 layout: default
-title: Getting Started
+title: 快速开始
 nav_order: 2
 has_children: true
 ---
 
-# Getting Started
+# 快速开始
 {: .no_toc }
 
 1. TOC
