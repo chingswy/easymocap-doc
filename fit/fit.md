@@ -1,13 +1,15 @@
 ---
 layout: default
-title: Tools
-nav_order: 6
+title: 离线优化
+nav_order: 4
 has_children: true
+has_toc: false
 ---
 
-# Tools
+# 离线优化
 {: .no_toc }
 
 1. TOC
 {:toc}
 ---
+

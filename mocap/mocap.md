@@ -1,13 +1,15 @@
 ---
 layout: default
-title: Tools
-nav_order: 6
+title: 运动捕捉
+nav_order: 3
 has_children: true
+has_toc: false
 ---
 
-# Tools
+# Solutions
 {: .no_toc }
 
 1. TOC
 {:toc}
 ---
+

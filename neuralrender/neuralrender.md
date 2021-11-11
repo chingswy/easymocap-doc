@@ -1,13 +1,15 @@
 ---
 layout: default
-title: Tools
-nav_order: 6
+title: 神经渲染
+nav_order: 5
 has_children: true
+has_toc: false
 ---
 
-# Tools
+# 神经渲染
 {: .no_toc }
 
 1. TOC
 {:toc}
 ---
+
