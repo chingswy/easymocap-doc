@@ -37,3 +37,5 @@ python3 apps/realtime/mv1p.py ${data} --host3d 127.0.0.1:9999 --robust --out ${d
 ```bash
 python3 apps/vis/vis.py --cfg config/vis2d/skel_mv_repro.yml images ${data} skel ${data}/output/keypoints3d out ${data}/output/skel make_video True scale 0.4
 ```
+
+![repro](../images/realtime/mv1p-repro.mp4)
