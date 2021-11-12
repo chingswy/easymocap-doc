@@ -30,7 +30,7 @@ nav_order: 3
 如果有图片，可直接存放图片。如果是以上视频，可使用脚本提取出图片：
 
 ```bash
-python3 scripts/preprocess/extract_video.py ${data} --no2d
+python3 apps/preprocess/extract_image.py ${data}
 ```
 
 提取后的数据目录需要如下所示：
@@ -67,6 +67,11 @@ python3 scripts/preprocess/extract_video.py ${data} --no2d
 请注意，如果有超过10个相机，并且如果使用数字命名的话，一定要给视频名称前面补0。
 
 ## 相机参数
+
+For example, if the name of a video is `1.mp4`, then there must exist `K_1`, `dist_1` in `intri.yml`, and `R_1((3, 1), rotation vector of camera)`, `T_1(3, 1)` in `extri.yml`. The file format is following [OpenCV format](https://docs.opencv.org/master/dd/d74/tutorial_file_input_output_with_xml_yml.html).
+
+相机参数的读写：参考`easymocap/mytools/camera_utils.py`=>`write_camera`, `read_camera`函数。
+
 ## 人体参数
 ## 输出结果
 

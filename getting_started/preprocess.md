@@ -27,6 +27,7 @@ python3 apps/preprocess/extract_image.py ${data} --strip video_ --num 2000 --sta
 |--start|起始帧数|
 
 ## 提取关键点
+
 |参数|含义|
 |----|----|
 |--openpose|OpenPose的安装路径|
