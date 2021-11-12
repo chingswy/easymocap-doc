@@ -1,7 +1,7 @@
 ---
 layout: default
 title: 多视角单人
-parent: 实时捕捉
+parent: 离线优化
 nav_order: 1
 ---
 
@@ -26,5 +26,5 @@ python3 apps/fit/fit_model.py --cfg_data config/data/mv1p3d2d.yml --cfg_model co
 
 可视化
 ```bash
-
+python3 apps/vis/vis.py --cfg config/vis2d/smpl_image.yml input_args.images ${data} input_args.subs ${subs} result_args.skel_path ${out}/smpl output_args.out ${out}/mesh input_args.scale 0.5
 ```
