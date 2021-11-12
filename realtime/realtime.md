@@ -1,6 +1,6 @@
 ---
 layout: default
-title: 运动捕捉
+title: 实时捕捉
 nav_order: 3
 has_children: true
 has_toc: false
