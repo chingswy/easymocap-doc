@@ -1,10 +1,3 @@
-<!--
- * @Date: 2021-11-13 14:54:41
- * @Author: Qing Shuai
- * @LastEditors: Qing Shuai
- * @LastEditTime: 2021-11-13 15:46:14
- * @FilePath: /easymocap-doc/getting_started/data_mhhi.md
--->
 ---
 layout: default
 title: MHHI

@@ -1,10 +1,3 @@
-<!--
- * @Date: 2021-11-13 16:26:33
- * @Author: Qing Shuai
- * @LastEditors: Qing Shuai
- * @LastEditTime: 2021-11-13 16:26:33
- * @FilePath: /easymocap-doc/realtime/mvmp.md
--->
 ---
 layout: default
 title: 多视角多人姿态估计
