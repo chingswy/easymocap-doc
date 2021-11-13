@@ -4,6 +4,7 @@ title: 相关论文
 nav_order: 6
 has_children: true
 has_toc: false
+mathjax: true
 ---
 
 # 相关论文
@@ -13,6 +14,4 @@ has_toc: false
 {:toc}
 ---
 
-$$
-V = T(\theta, \beta)
-$$
+$$V = T(\theta, \beta)$$

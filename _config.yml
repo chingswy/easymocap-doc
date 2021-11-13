@@ -50,3 +50,6 @@ color_scheme: mediapipe
 
 # Google Analytics Tracking (optional)
 # ga_tracking: UA-140696581-2
+
+compress_html:
+  blanklines: true
