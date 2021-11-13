@@ -1,8 +1,8 @@
 ---
 layout: default
-title: Panoptic
+title: Panoptic dataset
 parent: 数据格式
-nav_order: 2
+grand_parent: 快速开始
+nav_order: 1
 ---
-
 # Panoptic dataset

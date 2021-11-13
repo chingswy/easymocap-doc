@@ -1,8 +1,9 @@
 ---
 layout: default
-title: MHHI
+title: MHHI dataset
 parent: 数据格式
-nav_order: 3
+grand_parent: 快速开始
+nav_order: 1
 ---
 
 # MHHI dataset
