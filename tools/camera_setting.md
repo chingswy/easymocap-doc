@@ -18,7 +18,7 @@ nav_order: 4
 
 ## 工业相机配置
 
-这部分文档叙述如何使用FLIR工业相机。
+这部分文档叙述如何使用FLIR工业相机，对应代码位于`library/EasyFLIR`。
 
 ### 相机配置
 
@@ -32,7 +32,11 @@ nav_order: 4
 
 2. 同步安装
 
-使用同步线，设置相机触发 @huangdi
+使用同步线，设置相机触发，主要参考[FLIR官方网址](https://www.flir.com/support-center/iis/machine-vision/application-note/configuring-synchronized-capture-with-multiple-cameras/)。具体步骤如下：
+* 检查同步线PIN与Color之间的对应关系。不同厂商的PIN与Color之间的对应关系不同。
+* 根据工业相机的型号，在官方网址中找到对应的连线方式，进行连接。注意，在相机数量少的情况下，可以不使用对应的电阻。（在电路简单的情况下，可以直接使用绝缘胶带进行缠绕连接）
+* 连接完成后，使用Spinnaker的GUI进行验证。开启Master的capture后，任意slave都应可以正常capture；关闭Master的capture后，任意slave应该停止。
+* 验证同步误差。通过[ufo](https://www.testufo.com/)检查同步时间差。
 
 3. 安装Spinnaker
 
@@ -59,7 +63,14 @@ sudo sysctl -p
 
 以上步骤可使用docker替换。@wangyize
 
-4. cpp接口检查
+4. 使用Spinnaker GUI进行采集
+
+* 参考[FLIR官方网址](https://www.flir.com/support-center/iis/machine-vision/application-note/configuring-synchronized-capture-with-multiple-cameras/)进行多相机同步GUI采集。
+* 用GUI采集会收到带宽的限制而掉帧。用Streaming模式来避免OOM；用RAW模式来加速存图。
+* 确保保存的文件夹存在。
+* 在做NeRF相关的采集时，需要关闭white balance、Exposure Auto和Gain Auto。
+
+5. 使用cpp代码进行采集
 
 运行脚本，可以预览多个相机同步捕捉的图像
 
@@ -67,6 +78,7 @@ sudo sysctl -p
 todo
 ```
 
-5. 相机标定
+
+6. 相机标定
 
 见[相机标定](./calibration.md)文档。
