@@ -10,14 +10,16 @@ Before reading this document, you should read the OpenCV-Python Tutorials of [Ca
 
 ## Some Tips
 1. Use a chessboard as big as possible.
-2. You must keep the same resolution during all the steps.
+2. Use a chessboard as rigid as possible.
+3. You must keep the same resolution during all the steps.
 
 ## 0. Prepare your chessboard
 
 ## 1. Record videos
-Usually, we need to record two sets of videos, one for intrinsic parameters and one for extrinsic parameters.
+Usually, we need to record two sets of images, one for intrinsic parameters and one for extrinsic parameters.
 
-First, you should record a video with your chessboard for each camera separately. The videos of each camera should be placed into the `<intri_data>/videos` directory. The following code will take the file name as the name of each camera.
+First, you should record images with your chessboard for each camera separately. The images of each camera should be placed into the `<intri_data>/images` directory. The following code will take the file name as the name of each camera.
+
 ```bash
 <intri_data>
 └── videos
@@ -60,10 +62,8 @@ The sample extri data is like the picture below.
 ## 2. Detect the chessboard
 For both intrinsic parameters and extrinsic parameters, we need detect the corners of the chessboard. So in this step, we first extract images from videos and second detect and write the corners.
 ```bash
-# extract 2d
-python3 scripts/preprocess/extract_video.py ${data} --no2d
 # detect chessboard
-python3 apps/calibration/detect_chessboard.py ${data} --out ${data}/output/calibration --pattern 9,6 --grid 0.1
+python3 apps/calibration/detect_chessboard.py ${data} --out ${data}/output/calibration --pattern 9,6 --grid 0.1 --seq
 ```
 The results will be saved in `${data}/chessboard`, the visualization will be saved in `${data}/output/calibration`.
 

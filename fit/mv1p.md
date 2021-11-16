@@ -25,11 +25,20 @@ python3 apps/fit/fit_model.py --cfg_data config/data/mv1p3d2d.yml --cfg_model co
 ```
 
 可视化
+
 ```bash
+subs="['01', '07', '13', '19']"
 python3 apps/vis/vis.py --cfg config/vis2d/smpl_image.yml input_args.images ${data} input_args.subs ${subs} result_args.skel_path ${out}/smpl output_args.out ${out}/mesh input_args.scale 0.5
 ```
 
-## 帧率相同、开始时间不同的多相机场景
+渲染结果如图所示：
+
+<div align="center">
+<video width="70%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted=""><source src="../images/fit/mv1p-smpl.mp4" type="video/mp4">
+</video>
+</div>
+
+## 帧率相同、开始时间不同
 
 这部分主要面向LightStage数据，LightStage相机使用了硬触发，但是由于相机距离不同，导致不同相机的开启时间有<20ms的差异，因此需要各个视角优化一下。
 
