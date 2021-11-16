@@ -50,3 +50,10 @@ color_scheme: mediapipe
 
 # Google Analytics Tracking (optional)
 # ga_tracking: UA-140696581-2
+
+# copy from here: https://github.com/pdmosses/test-nav/blob/master/_config.yml
+compress_html:
+  blanklines: true
+mathjax:
+  source: https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS_CHTML
+  config: 'MathJax.Hub.Config({ TeX: { equationNumbers: { autoNumber: "AMS" } } })'

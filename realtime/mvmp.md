@@ -19,3 +19,7 @@ nav_order: 3
 ---
 
 ## Overview
+
+```bash
+python3 apps/demo/mvmp_realtime.py ${data} --cfg config/exp/mvmp_1920x1080.yml --vis_repro --out ${data}/output --cfg_opts width 1296 height 972 --undis
+```
