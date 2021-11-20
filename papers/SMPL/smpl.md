@@ -49,11 +49,11 @@ has_children: true
 
 pose参数是使用axis-angle来定义的，对于每一个joint，都有一个$\vec{\omega}_k\in \mathbb{R}^3$，然后加上原点处的，总共24个关节，就有72个参数。旋转矩阵是使用Rodrigues formula计算得到
 
-$W(\bar{\mathbf{T}},\mathbf{J},\vec{\theta},\mathcal{W}):\mathbb{R}^{2N\times 3K\times|\vec{\theta}|\times |\mathcal{W}|} \mapsto \mathbb{R}^{3N}$ ,将rest pose、joint location、pose参数、blend weights权重转化成每个点的坐标量。
+$$W(\bar{\mathbf{T}},\mathbf{J},\vec{\theta},\mathcal{W}):\mathbb{R}^{2N\times 3K\times|\vec{\theta}|\times |\mathcal{W}|} \mapsto \mathbb{R}^{3N}$$
+
+ ,将rest pose、joint location、pose参数、blend weights权重转化成每个点的坐标量。
 
 ![rig](assets/1539784149245.png)
-
-
 
 ### 代码实现
 
@@ -84,8 +84,7 @@ $W(\bar{\mathbf{T}},\mathbf{J},\vec{\theta},\mathcal{W}):\mathbb{R}^{2N\times 3K
 | bs_type               | <type 'str'>                              | 7 |
 | r                     | <type 'numpy.ndarray'>                    | (6890, 3) |
 
+其他实现：
 
-[SMPL的numpy及TensorFlow实现](https://github.com/CalciferZh/SMPL)
-
-[hmr论文中SMPL的tf实现](https://github.com/blzq/tf_smpl)
-****
+- [SMPL的numpy及TensorFlow实现](https://github.com/CalciferZh/SMPL)
+- [hmr论文中SMPL的tf实现](https://github.com/blzq/tf_smpl)
