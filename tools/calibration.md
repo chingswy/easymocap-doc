@@ -175,7 +175,7 @@ Then you can choose whether to save this annotation.
 After extracting chessboard, it is available to calibrate the intrinsic parameter.
 
 ```bash
-python3 apps/calibration/calib_intri.py ${data} --step 5
+python3 apps/calibration/calib_intri.py ${data} --num 200
 ```
 
 After the script finishes, you'll get `intri.yml` under `${data}/output`.

@@ -34,7 +34,7 @@ python3 apps/vis/vis.py --cfg config/vis2d/smpl_image.yml input_args.images ${da
 渲染结果如图所示：
 
 <div align="center">
-<video width="70%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted=""><source src="../images/fit/mv1p-smpl.mp4" type="video/mp4">
+<video width="70%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted=""><source src="../images/fit/mv1p/mv1p-smpl.mp4" type="video/mp4">
 </video>
 </div>
 
@@ -45,6 +45,16 @@ python3 apps/vis/vis.py --cfg config/vis2d/smpl_image.yml input_args.images ${da
 算法假设：
 - 各相机帧率一致
 - 各相机起始点不一致
-- 各相机的初始时间偏移在平均值的两侧分布
+- 各相机的时间差小于1帧
 
+拟合
 
+```bash
+python3 apps/fit/fit_model.py --cfg_data config/data/mv1p3d2d.yml --cfg_model config/model/smpl_neutral.yml --cfg_exp config/optimize/mv1p-unsync.yml --out ${out} --opt_data k2d ${data}/output/keypoints2d k3d ${data}/output/keypoints3d camera ${data} --write_mv
+```
+
+可视化
+
+```bash
+python3 apps/vis/vis.py --cfg config/vis2d/smpl_unsync_image.yml input_args.images ${data} subs ${subs} result_args.skel_path ${out}/smpl output_args.out ${out}/mesh-unsync input_args.scale 1
+```

@@ -57,6 +57,7 @@ color_scheme: mediapipe
 # ga_tracking: UA-140696581-2
 
 # copy from here: https://github.com/pdmosses/test-nav/blob/master/_config.yml
+# https://github.com/pdmosses/test-nav/blob/master/docs/Mathjax/EXAMPLE.md
 compress_html:
   blanklines: true
 mathjax:

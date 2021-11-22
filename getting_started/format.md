@@ -9,6 +9,9 @@ has_children: true
 # 数据格式
 {: .no_toc }
 
+- 考虑通用性，EasyMocap的所有数据使用相同的格式
+- 考虑文件可读性与可迁移性，数据基本使用`.json`格式存储，为了增加可读性，在输出到文件的时候需要进行format
+
 1. TOC
 {:toc}
 ---
@@ -73,12 +76,90 @@ For example, if the name of a video is `1.mp4`, then there must exist `K_1`, `di
 
 相机参数的读写：参考`easymocap/mytools/camera_utils.py`=>`write_camera`, `read_camera`函数。
 
-## 人体参数
+## 2D Pose
+
+For each image, we record its 2D pose in a `json` file. For an image at `root/images/1/000000.jpg`, the 2D pose willl store at `root/annots/1/000000.json`. The content of the annotation file is:
+
+```bash
+{
+    "filename": "images/0/000000.jpg",
+    "height": <the height of image>,
+    "width": <the width of image>,
+    "annots:[
+        {
+            'personID': 0, # ID of person
+            'bbox': [l, t, r, b, conf],
+            'keypoints': [[x0, y0, c0], [x1, y1, c1], ..., [xn, yn, cn]],
+            'area': <the area of bbox>
+        },
+        {
+            'personID': 1, # ID of person
+            'bbox': [l, t, r, b, conf],
+            'keypoints': [[x0, y0, c0], [x1, y1, c1], ..., [xn, yn, cn]],
+            'area': <the area of bbox>
+        }
+    ]
+}
+```
+
+The definition of the `keypoints` is `body25`. If you want to use other definitions, you should add it to `easymocap/dataset/config.py`
+
+If you use hand and face, the annot is defined as:
+```bash
+{
+    "personID": i,
+    "bbox": [l, t, r, b, conf],
+    "keypoints": [[x0, y0, c0], [x1, y1, c1], ..., [xn, yn, cn]],
+    "bbox_handl2d": [l, t, r, b, conf],
+    "bbox_handr2d": [l, t, r, b, conf],
+    "bbox_face2d": [l, t, r, b, conf],
+    "handl2d": [[x0, y0, c0], [x1, y1, c1], ..., [xn, yn, cn]],
+    "handr2d": [[x0, y0, c0], [x1, y1, c1], ..., [xn, yn, cn]],
+    "face2d": [[x0, y0, c0], [x1, y1, c1], ..., [xn, yn, cn]]
+}
+```
+
+## 3D Pose
+
+```bash
+[
+    {
+        'id': <id>, # the person ID
+        'keypoints3d': [[x0, y0, z0, c0], [x1, y1, z0, c1], ..., [xn, yn, zn, cn]], # x,y,z is the 3D coordinates, c means the confidence of this joint. If the c=0, it means this joint is invisible.
+    },
+    {
+        'id': <id>, # the person ID
+        'keypoints3d': [[x0, y0, z0, c0], [x1, y1, z0, c1], ..., [xn, yn, zn, cn]], # x,y,z is the 3D coordinates, c means the confidence of this joint. If the c=0, it means this joint is invisible.
+    }
+]
+```
+
+The definition of the keypoints can be found in `easymocap/dataset/config.py`. We main use the following formats:
+- body25: 25 keypoints of body
+- bodyhand: 25 body + 21 left hand + 21 right hand
+- bodyhandface: 25 body + 21 left hand + 21 right hand + 51 face keypoints
+
+## SMPL参数
+
+```bash
+{
+    "id": <id>,
+    "Rh": <(1, 3)>,
+    "Th": <(1, 3)>,
+    "poses": <(1, 72/78/87)>,
+    "expression": <(1, 10)>,
+    "shapes": <(1, 10)>
+}
+```
+
 ## 输出结果
 
 - keypoints3dfit: 表示拟合的SMPL的关键点
 - smpl_keypoints: 表示SMPL自身定义的关键点位置
 
+## 导出到bvh
+
+TODO
 
 ## 配置文件
 
