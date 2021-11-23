@@ -58,3 +58,24 @@ python3 apps/fit/fit_model.py --cfg_data config/data/mv1p3d2d.yml --cfg_model co
 ```bash
 python3 apps/vis/vis.py --cfg config/vis2d/smpl_unsync_image.yml input_args.images ${data} subs ${subs} result_args.skel_path ${out}/smpl output_args.out ${out}/mesh-unsync input_args.scale 1
 ```
+
+## 少视角单人
+少视角与多视角的区别是：
+- 无法使用多视角一致性来过滤错误的关键点，只能在拟合的时候使用鲁棒性的核函数来避免噪声。
+- 无法预先重建出3D关键点，只能通过SPIN或其他方式来进行初始化
+
+拟合：
+
+```bash
+python3 apps/fit/fit_model.py --cfg_data config/data/mvmp2d-hand.yml --cfg_model config/model/smplh_male.yml --cfg_exp config/multistage/sv1p-hand.yml --out ${out} --opt_data k2d ${data}/annots camera ${data} --opt_exp cache ${data}/output/spin
+```
+
+可视化：
+
+```bash
+
+```
+
+## 单视角单人
+
+如果没有特殊需求，单视角单人部分可以使用少视角单人的代码。
