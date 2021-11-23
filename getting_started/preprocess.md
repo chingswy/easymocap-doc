@@ -48,6 +48,11 @@ python3 apps/preprocess/extract_keypoints.py ${data} --openpose /path/to/openpos
 python3 apps/preprocess/extract_keypoints.py ${data} --openpose /path/to/openpose --hand --face
 ```
 
+|身体|手部|脸部|
+|----|----|----|
+|![身体](https://raw.githubusercontent.com/CMU-Perceptual-Computing-Lab/openpose/master/.github/media/keypoints_pose_25.png) | ![手部](https://raw.githubusercontent.com/CMU-Perceptual-Computing-Lab/openpose/master/.github/media/keypoints_hand.png) | ![脸部](https://raw.githubusercontent.com/CMU-Perceptual-Computing-Lab/openpose/master/.github/media/keypoints_face.png) |
+
+
 ### 使用YOLO+HRNet提取身体关键点
 
 自动模式：
