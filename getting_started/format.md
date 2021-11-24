@@ -152,11 +152,14 @@ The definition of the keypoints can be found in `easymocap/dataset/config.py`. W
 }
 ```
 
+
 <div align="center">
     <img src="../images/define/SMPL.png" width="60%">
     <br>
     <sup>SMPL骨架定义<sup/>
 </div>
+
+
 
 ## 输出结果
 

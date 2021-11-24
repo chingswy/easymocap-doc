@@ -18,7 +18,7 @@ nav_order: 2
 </details>
 ---
 
-## 固定手部姿态
+## 固定手部姿态拟合SMPLH
 
 拟合
 
@@ -31,3 +31,17 @@ python3 apps/fit/fit_model.py --cfg_data config/data/mv1h.yml --cfg_model config
 ```bash
 python3 apps/vis/render.py --cfg config/render/model_image.yml model config/model/smplh_male_full.yml images ${data} camera ${data} result ${out}/smpl out ${out}/mesh
 ```
+
+## 固定手部姿态拟合MANO左手
+
+拟合
+```bash
+out=${data}/output/mano
+python3 apps/fit/fit_model.py --cfg_data config/data/mv1h.yml --cfg_model config/model/mano.yml --cfg_exp config/multistage/fixmano.yml --out ${out} --opt_data k2d ${data}/annots camera ${data}
+```
+
+可视化
+```bash
+python3 apps/vis/render.py --cfg config/render/model_image.yml model config/model/mano.yml images ${data} camera ${data} result ${out}/smpl out ${out}/mesh input_args.image_args.scale 0.25
+```
+

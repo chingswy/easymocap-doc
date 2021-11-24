@@ -24,4 +24,22 @@ parent: 实用工具
     `第[n]帧由于第[v]个相机的[手腕|左手|右手]关键点检测[失败|遗漏|误匹配]，导致[速度突变|加速度突变|重投影误差大]`
 - 自动保存图片与文字，生成markdown/latex文档
 
+检查参数：
+
+```bash
+python3 apps/analyze/check_param.py ${out}/smpl --out ${out}
+```
+
+生成报告：
+
+```bash
+# 可视化一般的情况
+python3 apps/analyze/report_outlier.py ${out} ${out}/log --cfg_data config/data/mv1h.yml --opt_data k2d ${data}/annots camera ${data} data.keypoints2d.args.undis False
+# 处理MANO的情况
+python3 apps/analyze/report_outlier.py ${out} ${out}/log --cfg_data config/data/mv1h.yml --opt_data k2d ${data}/annots camera ${data} data.keypoints2d.args.undis False --mano
+```
+
+TODO: 可视化的时候增加SMPL的渲染结果
+
+
 ## 性能分析
