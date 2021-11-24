@@ -146,11 +146,17 @@ The definition of the keypoints can be found in `easymocap/dataset/config.py`. W
     "id": <id>,
     "Rh": <(1, 3)>,
     "Th": <(1, 3)>,
-    "poses": <(1, 72/78/87)>,
+    "poses": <(1, 60)>,
     "expression": <(1, 10)>,
     "shapes": <(1, 10)>
 }
 ```
+
+<div align="center">
+    <img src="../images/define/SMPL.png" width="60%">
+    <br>
+    <sup>SMPL骨架定义<sup/>
+</div>
 
 ## 输出结果
 

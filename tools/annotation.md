@@ -1,10 +1,3 @@
-<!--
- * @Date: 2021-11-17 14:40:59
- * @Author: Qing Shuai
- * @LastEditors: Qing Shuai
- * @LastEditTime: 2021-11-17 17:40:18
- * @FilePath: /easymocap-doc/tools/annotation.md
--->
 ---
 layout: default
 title: 标注工具
@@ -13,6 +6,13 @@ nav_order: 2
 ---
 
 # 标注工具
+{: .no_toc }
+
+这部分包含了多种数据标注的工具，基于OpenCV实现。
+
+1. TOC
+{:toc}
+---
 
 ## 关键点标注
 

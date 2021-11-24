@@ -6,6 +6,15 @@ nav_order: 1
 ---
 
 # Camera Calibration
+
+{: .no_toc }
+
+这部分文档包含相机标定的内容，以及多个场景下的相机标定。
+
+1. TOC
+{:toc}
+---
+
 Before reading this document, you should read the OpenCV-Python Tutorials of [Camera Calibration](https://docs.opencv.org/master/dc/dbb/tutorial_py_calibration.html) carefully.
 
 ## Some Tips
@@ -14,6 +23,57 @@ Before reading this document, you should read the OpenCV-Python Tutorials of [Ca
 3. You must keep the same resolution during all the steps.
 
 ## 0. Prepare your chessboard
+
+下载OpenCV官网上的棋盘格，或自己生成一个，去附近的文印店，告诉老板需要打到一个大的KT板上。并告诉老板需要一格有多长。
+
+## 1. 相机内参标定
+
+### 1.1 获取图像
+
+文件目录组织保持树状结构，所有的图片都保存在`images`目录下
+
+```bash
+<seq>
+└── images
+    ├── 1
+    │   ├── 000000.jpg
+    │   ├── 000001.jpg
+    │   ├── 000002.jpg
+    │   └── ...
+    ├── 2
+    │   ├── 000000.jpg
+    │   ├── 000001.jpg
+    │   ├── 000002.jpg
+    │   └── ...
+    ├── ...
+    ├── ...
+    ├── 8
+    │   ├── 000000.jpg
+    │   ├── 000001.jpg
+    │   ├── 000002.jpg
+    │   └── ...
+    └── 9
+        ├── 000000.jpg
+        ├── 000001.jpg
+        ├── 000002.jpg
+        └── ...
+```
+### 1.2 检测棋盘格
+
+### 1.3 内参标定
+
+## 2. 相机外参标定
+
+### 2.1 使用棋盘格
+
+### 2.2 使用标志点
+
+### 2.3 使用人体关键点
+
+## 3. 检查
+
+### 可视化检查
+
 
 ## 1. Record videos
 Usually, we need to record two sets of images, one for intrinsic parameters and one for extrinsic parameters.
