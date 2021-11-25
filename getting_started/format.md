@@ -156,8 +156,7 @@ SMPL骨架定义如图所示：
 
 <div align="center">
     <img src="../images/define/SMPL.png" width="60%">
-    <br>
-    <sup>SMPL骨架定义<sup/>
+    <br><sup>SMPL骨架定义</sup>
 </div>
 
 各个关节的旋转视频如下所示：
