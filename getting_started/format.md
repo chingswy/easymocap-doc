@@ -152,6 +152,7 @@ The definition of the keypoints can be found in `easymocap/dataset/config.py`. W
 }
 ```
 
+SMPL骨架定义如图所示：
 
 <div align="center">
     <img src="../images/define/SMPL.png" width="60%">
@@ -159,7 +160,9 @@ The definition of the keypoints can be found in `easymocap/dataset/config.py`. W
     <sup>SMPL骨架定义<sup/>
 </div>
 
+各个关节的旋转视频如下所示：
 
+MANO的各个关节的旋转视频如图所示：
 
 ## 输出结果
 
