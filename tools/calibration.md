@@ -58,59 +58,69 @@ Before reading this document, you should read the OpenCV-Python Tutorials of [Ca
         ├── 000002.jpg
         └── ...
 ```
+
 ### 1.2 检测棋盘格
 
-For both intrinsic parameters and extrinsic parameters, we need detect the corners of the chessboard. So in this step, we first extract images from videos and second detect and write the corners.
+首先需要检测棋盘格，对于一个`(9, 6)`的棋盘格，每一个格子的长度为`0.1m`，使用以下命令创建与检测棋盘格：
+
 ```bash
 # detect chessboard
 python3 apps/calibration/detect_chessboard.py ${data} --out ${data}/output/calibration --pattern 9,6 --grid 0.1 --seq
 ```
-The results will be saved in `${data}/chessboard`, the visualization will be saved in `${data}/output/calibration`.
 
-To specify your chessboard, add the option `--pattern`, `--grid`.
+参数含义：
+- `pattern`: 棋盘格的角点数
+- `grid`：棋盘格的每格的长度
+- `--seq`：如果拍的是一段视频，那么使用这个选项可以加速棋盘格的检测，会通过二分法去查找棋盘格。
 
-Repeat this step for `<intri_data>` and `<extri_data>`.
+> 注意：棋盘格并不是一个中心对称图形，其中的(9, 6)指的是角点的数目，而不是格子的数目。
 
-After this step, you should get the results like the pictures below.
+> 注意：对于一张有棋盘格的图像，检测会比较快，如果图像中没有棋盘格，那么检测会很慢，所以需要尽量保证需要检测的图像中包含棋盘格
 
-<div align="center">
-    <img src="assets/extri_chessboard.jpg" width="60%">
-    <br>
-    <sup>Result of Detecting Extrinsic Dataset</sup>
-</div>
-
+检测结果会以`json`格式存在`${data}/chessboard`中，可视化的结果会存在`${data}/output/calibration`中。
 
 <div align="center">
     <img src="assets/intri_chessboard.jpg" width="60%">
     <br>
-    <sup>Result of Detecting Intrinsic Dataset</sup>
+    <sup>棋盘格检测结果</sup>
 </div>
 
 ### 1.3 内参标定
 
-After extracting chessboard, it is available to calibrate the intrinsic parameter.
+棋盘格提取之后，计算相机内参。
+<!-- After extracting chessboard, it is available to calibrate the intrinsic parameter. -->
 
 ```bash
-python3 apps/calibration/calib_intri.py ${data} --num 200
+python3 apps/calibration/calib_intri.py ${data} --num 200 --share_intri
 ```
 
-After the script finishes, you'll get `intri.yml` under `${data}/output`.
+|参数名称|可选值|含义|
+|----|----|----|
+|ext|.jpg, .png| 图像后缀
+|num|>0|使用的图像数量|
+|share_intri|bool, 默认False|是否共享所有相机的内参|
 
-> This step may take a long time, so please be patient. :-)
+运行完成后，程序会输出`intri.yml`到`${data}/output`目录。
+<!-- After the script finishes, you'll get `intri.yml` under `${data}/output`. -->
+<!-- > This step may take a long time, so please be patient. :-) -->
+
+> 这一步如果使用200张图需要花费大概2小时
 
 ## 2. 相机外参标定
-
-对于单目的情况，无法使用多视角标定，可直接创建空白的相机，这个相机的焦距会根据输入的图像形状指定，光心在图像中心，旋转为单位阵，位置为0。注意，这样指定的相机无法用于多视角重建的代码，只能用于单视角重建。
-
-```bash
-python3 apps/calibration/create_blank_camera.py ${data} --shape 2160 3840
-```
 
 ### 2.1 使用棋盘格
 
 ### 2.2 使用标志点
 
 ### 2.3 使用人体关键点
+
+### 单目情况
+
+对于单目的情况，无法使用多视角标定，可直接创建空白的相机，这个相机的焦距会根据输入的图像形状指定，光心在图像中心，旋转为单位阵，位置为0。注意，这样指定的相机无法用于多视角重建的代码，只能用于单视角重建。
+
+```bash
+python3 apps/calibration/create_blank_camera.py ${data} --shape 2160 3840
+```
 
 ## 3. 检查
 
