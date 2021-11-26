@@ -60,9 +60,51 @@ Before reading this document, you should read the OpenCV-Python Tutorials of [Ca
 ```
 ### 1.2 检测棋盘格
 
+For both intrinsic parameters and extrinsic parameters, we need detect the corners of the chessboard. So in this step, we first extract images from videos and second detect and write the corners.
+```bash
+# detect chessboard
+python3 apps/calibration/detect_chessboard.py ${data} --out ${data}/output/calibration --pattern 9,6 --grid 0.1 --seq
+```
+The results will be saved in `${data}/chessboard`, the visualization will be saved in `${data}/output/calibration`.
+
+To specify your chessboard, add the option `--pattern`, `--grid`.
+
+Repeat this step for `<intri_data>` and `<extri_data>`.
+
+After this step, you should get the results like the pictures below.
+
+<div align="center">
+    <img src="assets/extri_chessboard.jpg" width="60%">
+    <br>
+    <sup>Result of Detecting Extrinsic Dataset</sup>
+</div>
+
+
+<div align="center">
+    <img src="assets/intri_chessboard.jpg" width="60%">
+    <br>
+    <sup>Result of Detecting Intrinsic Dataset</sup>
+</div>
+
 ### 1.3 内参标定
 
+After extracting chessboard, it is available to calibrate the intrinsic parameter.
+
+```bash
+python3 apps/calibration/calib_intri.py ${data} --num 200
+```
+
+After the script finishes, you'll get `intri.yml` under `${data}/output`.
+
+> This step may take a long time, so please be patient. :-)
+
 ## 2. 相机外参标定
+
+对于单目的情况，无法使用多视角标定，可直接创建空白的相机，这个相机的焦距会根据输入的图像形状指定，光心在图像中心，旋转为单位阵，位置为0。注意，这样指定的相机无法用于多视角重建的代码，只能用于单视角重建。
+
+```bash
+python3 apps/calibration/create_blank_camera.py ${data} --shape 2160 3840
+```
 
 ### 2.1 使用棋盘格
 
@@ -94,7 +136,7 @@ In this tutorial, we use our sample datasets as an example. In that dataset, the
 <div align="center">
     <img src="assets/intri_sample.png" width="60%">
     <br>
-    <sup>Example Intrinsic Dataset<sup/>
+    <sup>Example Intrinsic Dataset</sup>
 </div>
 
 
@@ -115,7 +157,7 @@ The sample extri data is like the picture below.
 <div align="center">
     <img src="assets/extri_sample.png" width="60%">
     <br>
-    <sup>Example Extrinsic Dataset<sup/>
+    <sup>Example Extrinsic Dataset</sup>
 </div>
 
 
@@ -136,14 +178,14 @@ After this step, you should get the results like the pictures below.
 <div align="center">
     <img src="assets/extri_chessboard.jpg" width="60%">
     <br>
-    <sup>Result of Detecting Extrinsic Dataset<sup/>
+    <sup>Result of Detecting Extrinsic Dataset</sup>
 </div>
 
 
 <div align="center">
     <img src="assets/intri_chessboard.jpg" width="60%">
     <br>
-    <sup>Result of Detecting Intrinsic Dataset<sup/>
+    <sup>Result of Detecting Intrinsic Dataset</sup>
 </div>
 
 ## 2.5 Finetune the Chessboard Detection Result
@@ -159,7 +201,7 @@ After running the script above, a OpenCV GUI prompt will show, like below:
 <div align="center">
     <img src="assets/ft1.png" width="60%">
     <br>
-    <sup>Calibration Annotation Toolkit GUI Interface<sup/>
+    <sup>Calibration Annotation Toolkit GUI Interface</sup>
 </div>
 
 
@@ -171,7 +213,7 @@ At the same time, you can see that the CLI presents some auxilary information.
 <div align="center">
     <img src="assets/ft2.png" width="60%">
     <br>
-    <sup>CLI Prompt of the Annotation Tool<sup/>
+    <sup>CLI Prompt of the Annotation Tool</sup>
 </div>
 
 
@@ -183,7 +225,7 @@ In the GUI, the current edited corner is highlighted by a red circle. If you wan
 <div align="center">
     <img src="assets/ft3.png" width="60%">
     <br>
-    <sup>Use mouse to specify the correct position<sup/>
+    <sup>Use mouse to specify the correct position</sup>
 </div>
 
 If you think the newly specified coordinate(marked as white anchor) should be the correct position for this corner, rather than old one, press `Space` to confirm. Then the corner position will be changed. 
@@ -191,7 +233,7 @@ If you think the newly specified coordinate(marked as white anchor) should be th
 <div align="center">
     <img src="assets/ft4.png" width="60%">
     <br>
-    <sup>The result after modifing the position of point<sup/>
+    <sup>The result after modifing the position of point</sup>
 </div>
 
 After finish modifying this point, press `Space` to move on to next point.
@@ -200,7 +242,7 @@ After finish modifying this point, press `Space` to move on to next point.
 <div align="center">
     <img src="assets/ft5.png" width="60%">
     <br>
-    <sup>Press Space to move on to next point<sup/>
+    <sup>Press Space to move on to next point</sup>
 </div>
 
 > Currently we only support move to next point. If you want to move to previous point, please `Space` for many times until it back to start.
@@ -211,7 +253,7 @@ If you're satisfied with this frame, you can press `D` move on to next frame.
 <div align="center">
     <img src="assets/ft6.png" width="60%">
     <br>
-    <sup>Press D to move on to next frame<sup/>
+    <sup>Press D to move on to next frame</sup>
 </div>
 
 
@@ -222,7 +264,7 @@ After finish annotating every frames, press `q` to quit.
 <div align="center">
     <img src="assets/ft7.png" width="40%">
     <br>
-    <sup>CLI prompt to save the result. Press Y to save and N to discard<sup/>
+    <sup>CLI prompt to save the result. Press Y to save and N to discard</sup>
 </div>
 
 Then you can choose whether to save this annotation.
@@ -271,7 +313,7 @@ A window will be shown for checking.
 <div align="center">
     <img src="assets/vis_check.png" width="60%">
     <br>
-    <sup>Use chessboard to check results<sup/>
+    <sup>Use chessboard to check results</sup>
 </div>
 
 **Check the results with a cube.**
@@ -285,5 +327,5 @@ You'll get results in `$data/output/cube`.
 <div align="center">
     <img src="assets/cube.jpg" width="60%">
     <br>
-    <sup>Use cube to check results<sup/>
+    <sup>Use cube to check results</sup>
 </div>

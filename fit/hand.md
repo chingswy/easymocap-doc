@@ -32,6 +32,13 @@ python3 apps/fit/fit_model.py --cfg_data config/data/mv1h.yml --cfg_model config
 python3 apps/vis/render.py --cfg config/render/model_image.yml model config/model/smplh_male_full.yml images ${data} camera ${data} result ${out}/smpl out ${out}/mesh
 ```
 
+## 拟合MANO左手
+
+```bash
+python3 apps/fit/fit_model.py --cfg_data config/data/mv1h.yml --cfg_model config/model/mano_noflat_pca_comps45.yml --cfg_exp config/multistage/sv1p-mano.yml --out ${out} --opt_data k2d ${data}/annots camera ${data} --opt_exp initialize.init_spin.args.cache_path ${data}/output/manol
+```
+
+
 ## 固定手部姿态拟合MANO左手
 
 拟合
