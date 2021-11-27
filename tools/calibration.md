@@ -68,10 +68,11 @@ Before reading this document, you should read the OpenCV-Python Tutorials of [Ca
 python3 apps/calibration/detect_chessboard.py ${data} --out ${data}/output/calibration --pattern 9,6 --grid 0.1 --seq
 ```
 
-参数含义：
-- `pattern`: 棋盘格的角点数
-- `grid`：棋盘格的每格的长度
-- `--seq`：如果拍的是一段视频，那么使用这个选项可以加速棋盘格的检测，会通过二分法去查找棋盘格。
+|参数名称|可选值|含义|
+|----|----|----|
+|pattern|9,6|棋盘格的角点数|
+|grid|0.1|棋盘格的每格的长度|
+|seq|bool, 默认False|如果拍的是一段视频，那么使用这个选项可以加速棋盘格的检测，会通过二分法去查找棋盘格|
 
 > 注意：棋盘格并不是一个中心对称图形，其中的(9, 6)指的是角点的数目，而不是格子的数目。
 
@@ -115,7 +116,7 @@ python3 apps/calibration/calib_intri.py ${data} --num 200 --share_intri
 对于多个相机可以拍到地面的情况，首先将棋盘格放置到地面，确保每一个相机都能看到。接着抓取一帧图片，如图所示。
 
 <div align="center">
-    <img src="images/calibration/ground_img.jpg" width="60%">
+    <img src="../images/calibration/ground_img.jpg" width="60%">
     <br>
     <sup>将棋盘格放置在地面</sup>
 </div>
@@ -147,7 +148,7 @@ TODO
 在多相机的情况下，可以利用多视角的一致性信息。
 
 <div align="center">
-    <img src="images/calibration/ba_img.jpg" width="60%">
+    <img src="../images/calibration/ba_img.jpg" width="60%">
     <br>
     <sup>棋盘格在多个相机内可见</sup>
 </div>
@@ -185,8 +186,28 @@ python3 apps/calibration/create_blank_camera.py ${data} --shape 2160 3840
 
 ### 可视化检查
 
+```bash
+out=/path/to/output
+python3 apps/calibration/check_calib.py ${data} --out ${out} --mode grid --show
+```
 
-## 1. Record videos
+<div align="center">
+    <img src="../images/calibration/check_cube.jpg" width="60%">
+    <br>
+    <sup>可视化虚拟的立方体</sup>
+</div>
+
+立方体的顶点0坐标为`(0, 0, 0)`，顶点1坐标为`(1, 0, 0)`，顶点3坐标为`(0, 1, 0)`，顶点4坐标为`(0, 0, 1)`。
+
+### 定量结果
+如果使用了BA来进行标定，可以通过这一步定量计算所有帧的平均标定误差。
+
+```bash
+out=/path/to/output
+python3 apps/calibration/check_calib.py ${data} --out ${out} --mode match --show
+```
+
+<!-- ## 1. Record videos
 Usually, we need to record two sets of images, one for intrinsic parameters and one for extrinsic parameters.
 
 First, you should record images with your chessboard for each camera separately. The images of each camera should be placed into the `<intri_data>/images` directory. The following code will take the file name as the name of each camera.
@@ -397,4 +418,4 @@ You'll get results in `$data/output/cube`.
     <img src="assets/cube.jpg" width="60%">
     <br>
     <sup>Use cube to check results</sup>
-</div>
+</div> -->
