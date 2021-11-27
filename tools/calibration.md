@@ -144,6 +144,34 @@ TODO
 
 ### 2.4 BA优化
 
+在多相机的情况下，可以利用多视角的一致性信息。
+
+<div align="center">
+    <img src="images/calibration/ba_img.jpg" width="60%">
+    <br>
+    <sup>棋盘格在多个相机内可见</sup>
+</div>
+
+
+```bash
+data=/path/to/img
+# 以下三种情况选择其中一个
+# 1. 只优化相机的RT
+python3 apps/calibration/calib_ba.py ${data} --init ${data}/../ground --ground ${data}/../ground --out ${data}/output-ba
+# 1. 优化相机的RT，同时优化K
+python3 apps/calibration/calib_ba.py ${data} --init ${data}/../ground --ground ${data}/../ground --out ${data}/output-ba-optK --optK
+# 1. 优化相机的RT，同时优化K, D
+python3 apps/calibration/calib_ba.py ${data} --init ${data}/../ground --ground ${data}/../ground --out ${data}/output-ba-optKD --optK --optD
+```
+
+|参数名称|可选值|含义|
+|----|----|----|
+|init|<path>| 初始化的相机内参与外参的路径 |
+|ground|<path>|拍摄的棋盘格放在地面的文件路径|
+|out|<path>|标定结果输出路径|
+|optK|bool|是否优化相机的焦距、光心，默认False|
+|optD|bool|是否优化相机的畸变参数，默认False|
+
 
 ### 单目情况
 
