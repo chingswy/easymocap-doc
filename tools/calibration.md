@@ -80,7 +80,7 @@ python3 apps/calibration/detect_chessboard.py ${data} --out ${data}/output/calib
 检测结果会以`json`格式存在`${data}/chessboard`中，可视化的结果会存在`${data}/output/calibration`中。
 
 <div align="center">
-    <img src="assets/intri_chessboard.jpg" width="60%">
+    <img src="images/calibration/chessboard.jpg" width="60%">
     <br>
     <sup>棋盘格检测结果</sup>
 </div>
@@ -108,11 +108,42 @@ python3 apps/calibration/calib_intri.py ${data} --num 200 --share_intri
 
 ## 2. 相机外参标定
 
+相机外参标定步骤用于确定各个相机的在世界坐标中的位置。通常会使用一些标志点来确定世界坐标。最简单的方式是使用棋盘格，对于大场景无法使用棋盘格的，可以使用场景中的标志点，并测量其实际物理坐标。
+
 ### 2.1 使用棋盘格
+
+对于多个相机可以拍到地面的情况，首先将棋盘格放置到地面，确保每一个相机都能看到。接着抓取一帧图片，如图所示。
+
+<div align="center">
+    <img src="images/calibration/ground_img.jpg" width="60%">
+    <br>
+    <sup>将棋盘格放置在地面</sup>
+</div>
+
+检测棋盘格：
+
+```bash
+python3 apps/calibration/detect_chessboard.py ${data} --out ${data}/output/calibration --pattern 9,6 --grid 0.1 --debug
+```
+
+标定外参，注意在这里需要指定之前标定的相机内参的路径：
+
+```bash
+python3 apps/calibration/calib_extri.py ${data} --intri <path/to/intri>/intri.yml
+```
+
+相机外参将会输出到`${data}`目录下。
 
 ### 2.2 使用标志点
 
+
+
 ### 2.3 使用人体关键点
+
+TODO
+
+### 2.4 BA优化
+
 
 ### 单目情况
 
