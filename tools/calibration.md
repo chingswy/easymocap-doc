@@ -135,8 +135,8 @@ python3 apps/annotation/annot_calib.py ${data} --annot chessboard --mode chessbo
 
 |按键|功能|
 |----|----|----|
-|q|退出标注|
-|` `|切换到下一个点|
+|`q`/`Q`|退出标注/不保存直接退出|
+|`空格`|切换到下一个点|
 |`b`|切换到上一个点|
 |`e`|对于选定的矩形框，进行检测|
 
@@ -194,9 +194,9 @@ python3 apps/calibration/calib_ba.py ${data} --init ${data}/../ground --ground $
 
 |参数名称|可选值|含义|
 |----|----|----|
-|init|<path>| 初始化的相机内参与外参的路径 |
-|ground|<path>|拍摄的棋盘格放在地面的文件路径|
-|out|<path>|标定结果输出路径|
+|init|path| 初始化的相机内参与外参的路径 |
+|ground|path|拍摄的棋盘格放在地面的文件路径|
+|out|path|标定结果输出路径|
 |optK|bool|是否优化相机的焦距、光心，默认False|
 |optD|bool|是否优化相机的畸变参数，默认False|
 
@@ -213,6 +213,8 @@ python3 apps/calibration/create_blank_camera.py ${data} --shape 2160 3840
 
 ### 可视化检查
 
+#### cube
+
 ```bash
 out=/path/to/output
 python3 apps/calibration/check_calib.py ${data} --out ${out} --mode grid --show
@@ -225,6 +227,22 @@ python3 apps/calibration/check_calib.py ${data} --out ${out} --mode grid --show
 </div>
 
 立方体的顶点0坐标为`(0, 0, 0)`，顶点1坐标为`(1, 0, 0)`，顶点3坐标为`(0, 1, 0)`，顶点4坐标为`(0, 0, 1)`。
+
+#### human
+
+设置`data`为人体Tpose的数据，检查人体重投影误差
+
+```bash
+python3 apps/calibration/check_calib.py ${data} --out ${data} --mode human --show
+```
+
+如果检测了手的关键点，可以增加`--hand`标志来加入手部关键点。
+
+<div align="center">
+    <img src="../images/calibration/check_human.jpg" width="60%">
+    <br>
+    <sup>可视化关键点重投影；绿色的为检测的位置，红色的为重投影的位置</sup>
+</div>
 
 ### 定量结果
 如果使用了BA来进行标定，可以通过这一步定量计算所有帧的平均标定误差。
