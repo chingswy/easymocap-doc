@@ -81,7 +81,7 @@ python3 apps/calibration/detect_chessboard.py ${data} --out ${data}/output/calib
 检测结果会以`json`格式存在`${data}/chessboard`中，可视化的结果会存在`${data}/output/calibration`中。
 
 <div align="center">
-    <img src="images/calibration/chessboard.jpg" width="60%">
+    <img src="../images/calibration/chessboard.jpg" width="60%">
     <br>
     <sup>棋盘格检测结果</sup>
 </div>
@@ -127,6 +127,19 @@ python3 apps/calibration/calib_intri.py ${data} --num 200 --share_intri
 python3 apps/calibration/detect_chessboard.py ${data} --out ${data}/output/calibration --pattern 9,6 --grid 0.1 --debug
 ```
 
+使用标注工具检查检测的棋盘格是否有问题：
+
+```bash
+python3 apps/annotation/annot_calib.py ${data} --annot chessboard --mode chessboard
+```
+
+|按键|功能|
+|----|----|----|
+|q|退出标注|
+|` `|切换到下一个点|
+|`b`|切换到上一个点|
+|`e`|对于选定的矩形框，进行检测|
+
 标定外参，注意在这里需要指定之前标定的相机内参的路径：
 
 ```bash
@@ -134,6 +147,20 @@ python3 apps/calibration/calib_extri.py ${data} --intri <path/to/intri>/intri.ym
 ```
 
 相机外参将会输出到`${data}`目录下。
+
+#### LightStage
+
+对于LightStage数据，需要使用2048分辨率下的图片
+```bash
+python3 apps/calibration/calib_extri.py ${data} --intri data/camera/intri_lightstage_2048.yml
+# 对输出的相机参数缩小一半，得到1024分辨率下的相机参数
+python3 apps/calibration/transform_camera.py ${data} ${data}/1024 --scale 0.5
+```
+此时的`${data}/1024`目录下即为所需的输出。
+
+#### Hikvision
+
+
 
 ### 2.2 使用标志点
 

@@ -51,3 +51,14 @@ python3 apps/vis/vis.py --cfg config/vis2d/skel_mv_repro.yml images ${data} subs
 <video width="70%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted=""><source src="../images/realtime/mv1p-repro-01071319.mp4" type="video/mp4">
 </video>
 </div>
+
+## 躯干+手
+
+对以上代码稍微修改，可以同时重建躯干和手部
+
+```bash
+# 开启可视化服务器
+python3 apps/vis/vis_server.py --cfg config/vis3d/o3d_scene.yml body bodyhand
+# 运行代码
+python3 apps/realtime/mv1p.py ${data} --host3d 127.0.0.1:9999 --robust --out ${data}/output --hand
+```
