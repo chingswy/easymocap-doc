@@ -105,7 +105,8 @@ python3 apps/calibration/calib_intri.py ${data} --num 200 --share_intri
 <!-- After the script finishes, you'll get `intri.yml` under `${data}/output`. -->
 <!-- > This step may take a long time, so please be patient. :-) -->
 
-> 这一步如果使用200张图需要花费大概2小时
+{: .note }
+这一步如果使用200张图需要花费大概2小时
 
 ## 2. 相机外参标定
 

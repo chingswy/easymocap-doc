@@ -2,3 +2,11 @@ $link-color: #0097A7;
 .highlight pre{
     white-space: pre-wrap;
 }
+blockquote {
+    color: gray;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 50px;
+    padding-left: 15px;
+    border-left: 3px solid #ccc;
+}

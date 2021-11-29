@@ -1,0 +1,82 @@
+// Copied from https://github.com/pmarsceill/just-the-docs/issues/171#issuecomment-538794741
+
+// Examples of use in Kramdown:
+
+// Do not blah blah blah...
+// {: .info } // OR: {: .warn } OR: {: .danger }
+
+$callouts: (
+    note: ($blue-300, rgba($blue-000, .2), 'INFO'),
+    caution: ($yellow-300, rgba($yellow-000, .2), 'WARNING'),
+    danger: ($red-300, rgba($red-000, .2), 'DANGER')
+);
+
+@each $class, $props in $callouts {
+    .#{$class} {
+        background: nth($props, 2);
+        border-left: $border-radius solid nth($props, 1);
+        border-radius: $border-radius;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12), 0 3px 10px rgba(0, 0, 0, 0.08);
+        padding: .8rem;
+
+        &::before {
+            color: nth($props, 1);
+            content: nth($props, 3);
+            display: block;
+            font-weight: bold;
+            font-size: .75em;
+            padding-bottom: .125rem;
+        }
+    }
+}
+
+blockquote.note {
+  margin-left: 0;
+  
+  > p:first-child {
+    margin-top: 0;
+  }
+    
+  > p:last-child {
+    margin-bottom: 0;
+  }
+}
+
+
+// Correction for the issue illustrated in /docs/css/tasks.md
+
+.main-content {
+  ul {
+    margin-top: 0.5em;
+    padding-left: 1.5em;
+    list-style: none;
+
+    > li {
+      &::before {
+        position: absolute;
+        margin-left: -1.4em;
+        color: $grey-dk-000;
+        content: "•";
+      }
+    }
+  }
+
+  .task-list {
+    padding-left: 1.5em;
+  }
+
+  .task-list-item {
+    display: block;
+    align-items: none;
+
+    &::before {
+      position: relative;
+      content: "";
+    }
+  }
+
+  .task-list-item-checkbox {
+    margin-right: 0.6em;
+  }
+
+}
