@@ -74,9 +74,11 @@ python3 apps/calibration/detect_chessboard.py ${data} --out ${data}/output/calib
 |grid|0.1|棋盘格的每格的长度|
 |seq|bool, 默认False|如果拍的是一段视频，那么使用这个选项可以加速棋盘格的检测，会通过二分法去查找棋盘格|
 
-> 注意：棋盘格并不是一个中心对称图形，其中的(9, 6)指的是角点的数目，而不是格子的数目。
+{: .note }
+棋盘格并不是一个中心对称图形，其中的(9, 6)指的是角点的数目，而不是格子的数目。如果打印的棋盘格是中心对称的，那么肯定打印错了。
 
-> 注意：对于一张有棋盘格的图像，检测会比较快，如果图像中没有棋盘格，那么检测会很慢，所以需要尽量保证需要检测的图像中包含棋盘格
+{: .note }
+对于一张有棋盘格的图像，检测会比较快，如果图像中没有棋盘格，那么检测会很慢，所以需要尽量保证需要检测的图像中包含棋盘格
 
 检测结果会以`json`格式存在`${data}/chessboard`中，可视化的结果会存在`${data}/output/calibration`中。
 
@@ -165,10 +167,12 @@ python3 apps/calibration/transform_camera.py ${data} ${data}/1024 --scale 0.5
 
 ### 2.2 使用标志点
 
-
+{: .note }
+TODO
 
 ### 2.3 使用人体关键点
 
+{: .note }
 TODO
 
 ### 2.4 BA优化
@@ -176,9 +180,9 @@ TODO
 在多相机的情况下，可以利用多视角的一致性信息。
 
 <div align="center">
-    <img src="../images/calibration/ba_img.jpg" width="60%">
+    <img src="../images/calibration/match_img.jpg" width="60%">
     <br>
-    <sup>棋盘格在多个相机内可见</sup>
+    <sup>棋盘格在至少三个相机内可见</sup>
 </div>
 
 
@@ -214,7 +218,7 @@ python3 apps/calibration/create_blank_camera.py ${data} --shape 2160 3840
 
 ### 可视化检查
 
-#### cube
+**cube:**
 
 ```bash
 out=/path/to/output
@@ -229,7 +233,7 @@ python3 apps/calibration/check_calib.py ${data} --out ${out} --mode grid --show
 
 立方体的顶点0坐标为`(0, 0, 0)`，顶点1坐标为`(1, 0, 0)`，顶点3坐标为`(0, 1, 0)`，顶点4坐标为`(0, 0, 1)`。
 
-#### human
+**human:**
 
 设置`data`为人体Tpose的数据，检查人体重投影误差
 
