@@ -167,8 +167,27 @@ python3 apps/calibration/transform_camera.py ${data} ${data}/1024 --scale 0.5
 
 ### 2.2 使用标志点
 
-{: .note }
-TODO
+创建标志点
+```bash
+python3 apps/calibration/create_marker.py ${data} --N 100
+```
+
+手动标注：
+```bash
+python3 apps/annotation/annot_calib.py ${data} --annot chessboard --mode marker
+```
+
+|按键|功能|
+|----|----|----|
+|单击|点中一个点|
+|`空格`|确认当前选中的点，并切换到下一个点|
+|`b`|切换到上一个点|
+
+此时的可视化为5个点为1组，依次连接。
+
+标定外参，使用BA
+
+
 
 ### 2.3 使用人体关键点
 

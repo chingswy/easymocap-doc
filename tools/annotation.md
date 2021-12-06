@@ -41,3 +41,19 @@ python3 apps/annotation/annot_track.py ${data} --annot basketball --max_person 1
 ```
 
 ## 标注背景的mask
+
+
+
+## 多视角同步
+
+需求：
+- 多个窗口一起移动
+- 单个窗口选中之后可以单独移动
+- 记录关键帧
+- 保存关键帧
+
+## 多视角标注
+
+需求：
+- 多个窗口一起移动
+- 选中某个视角里的某个人
