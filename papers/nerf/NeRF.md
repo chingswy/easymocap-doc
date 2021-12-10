@@ -18,3 +18,12 @@ This is the template of the paper list.
 - [Deblur-NeRF: Neural Radiance Fields from Blurry Image](https://arxiv.org/pdf/2111.14292.pdf)
 - [NeRF in the Dark: High Dynamic Range View Synthesis from Noisy Raw Images](https://arxiv.org/pdf/2111.13679.pdf)
 - [GeoNeRF: Generalizing NeRF with Geometry Priors](https://arxiv.org/pdf/2111.13539.pdf)
+- [Stable View Synthesis](https://arxiv.org/pdf/2011.07233.pdf)
+- [Neural Head Avatars from Monocular RGB Videos](https://philgras.github.io/neural_head_avatars/neural_head_avatars.html)
+- [NeRS: Neural Reflectance Surfaces for Sparse-View 3D Reconstruction in the Wild](https://github.com/jasonyzhang/ners)
+
+
+## 人体相关
+
+- [HumanNeRF: Generalizable Neural Human Radiance Field from Sparse Inputs](https://arxiv.org/pdf/2112.02789.pdf)
+

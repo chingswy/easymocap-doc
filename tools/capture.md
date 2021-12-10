@@ -71,9 +71,16 @@ data=/path/to/sequence
 python3 apps/preprocess/extract_image.py ${data}
 ```
 
-5. 使用音频粗糙同步，获得声音最大值的区域
+5. (可选)使用音频粗糙同步，获得声音最大值的区域
 6. 使用脚本肉眼进一步同步，同步帧记录在`${data}/sync.json`里面
 7. 对每段数据，截取：空白帧，棋盘格帧，人体标定帧，数据帧
+
+```bash
+# 选择前第400帧为地面帧，放置了标定板的
+python3 apps/annotation/copy_mv_sync.py ${data} --out ${data}/../seq0-sync/ground --frames -400
+# 选择 250,400,1000帧用于标定
+python3 scripts/preprocess/copy_dataset.py ${data} ${data}/h5-seq0-sync/calibhuman --frames 250 400 1000
+```
 
 
 ### 女足数据采集
