@@ -55,24 +55,35 @@ python3 apps/preprocess/extract_keypoints.py ${data} --openpose /path/to/openpos
 
 ### 使用YOLO+HRNet提取身体关键点
 
-自动模式：
-
 手动模式：
 只用yolo提取框：
 ```bash
-python3 apps/preprocess/extract_keypoints.py ${data} --mode yolo
+python3 apps/preprocess/extract_keypoints.py ${data} --mode yolo --annot annots-hr
 ```
 
-标注框：
+标注框（可跳过）：
 ```bash
 python3 apps/annotation/annot_track.py ${data} --sub <list of specified views>
 ```
 
 提取关键点：
 
+```bash
+python3 apps/preprocess/extract_keypoints.py ${data} --mode hrnet --annot annots-hr --force
+```
 
+可视化与标注关键点：
+```bash
+python3 apps/annotation/annot_keypoin
+ts.py ${data} --annot annots-hr
+```
 
-### mediapipe
+使用OpenPose提取脚：
+```bash
+python3 apps/preprocess/extract_keypoints.py ${data} --mode feet --annot annots-hr --force --openpose ${openpose}
+```
+
+### mediapipe(只支持单人)
 
 #### 提取全身关键点
 
@@ -102,5 +113,5 @@ python3 scripts/preprocess/extract_hand.py /nas/users/huangdi/MixCap/2021-10-09-
 选择数据集的部分帧，拷贝到新的目录：
 
 ```bash
-python3 scripts/
+python3 scripts/preprocess/copy_dataset.py ${data} ${data}/../seq0-1700-2000 --start 1700 --end 2000 --step 1 --keys annots ball
 ```

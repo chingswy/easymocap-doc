@@ -51,6 +51,9 @@ python3 apps/annotation/annot_track.py ${data} --annot basketball --max_person 1
 {: .note }
 目前还不支持多个物体的标注
 
+{: .note }
+需要支持物体类别的标注
+
 重建三维轨迹：
 {: .note }
 实现多个同类型的物体一起重建的代码；是否可以考虑多个物体与多人一起重建，怎么鲁棒的完成这件事情； 如何把物体的关键点结合进来；
