@@ -15,8 +15,7 @@ grand_parent: 实用工具
 运行脚本，将数据转换为多视角的EasyMocap格式
 
 ```bash
-python3 scripts/postprocess/cvt_yol
-o.py ${data} /nas/dataset/human/anyball --annots football
+python3 scripts/postprocess/cvt_yolo.py ${data} /nas/dataset/human/anyball --annots football
 ```
 
 ## 物体检测
@@ -54,7 +53,7 @@ python3 train.py --img 640 --batch 16 --epochs 100 --data data/anyball.yaml --we
 数据配置为`data/anyball.yaml`，里面内容为
 
 ```python
-path: ../datasets/anyball  # dataset root dir
+path: /nas/dataset/human/anyball  # dataset root dir
 train: images  # train images (relative to 'path') 128 images
 val: images  # val images (relative to 'path') 128 images
 test:  # test images (optional)
