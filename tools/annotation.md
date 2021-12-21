@@ -10,6 +10,11 @@ nav_order: 2
 
 这部分包含了多种数据标注的工具，基于OpenCV实现。
 
+如果只使用标注部分，安装比较简单，主要依赖于OpenCV库，可以直接在现有的环境上安装
+```bash
+python3 setup.py develop
+```
+
 1. TOC
 {:toc}
 ---
