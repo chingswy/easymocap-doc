@@ -26,4 +26,8 @@ This is the template of the paper list.
 ## 人体相关
 
 - [HumanNeRF: Generalizable Neural Human Radiance Field from Sparse Inputs](https://arxiv.org/pdf/2112.02789.pdf)
+- [HVTR: Hybrid Volumetric-Textural Rendering for Human Avatars](https://arxiv.org/pdf/2112.10203.pdf)
 
+## 头发
+- [HVH: Learning a Hybrid Neural Volumetric Representation for Dynamic Hair Performance Capture](https://arxiv.org/pdf/2112.06904.pdf)
+- [Convolutional Neural Opacity Radiance Fields](https://arxiv.org/pdf/2104.01772.pdf)

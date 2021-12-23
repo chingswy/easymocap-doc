@@ -79,16 +79,19 @@ python3 apps/preprocess/extract_object2d.py ${data} --ckpt <path_to_best_checkpo
 python3 apps/preprocess/extract_object2d.py ${data} --ckpt ~/Project/yolov5/runs/train/exp5/weights/best.pt --out object2d
 ```
 
+本地2D可视化
+```bash
+python3 apps/annotation/annot_track.py ${data} --annot object2d --max_person 1 --step 5
+```
+
+## 多视角重建
+
 对于多视角数据，提取出3D关键点的位置：
 
 ```bash
 python3 apps/realtime/mvmo.py ${data} --ids 'football' --annot ball
 ```
 
-本地2D可视化
-```bash
-python3 apps/annotation/annot_track.py ${data} --annot object2d --max_person 1 --step 5
-```
 
 3D重投影可视化：
 
