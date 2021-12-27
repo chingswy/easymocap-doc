@@ -56,7 +56,7 @@ grand_parent: 实用工具
 <div align="center">
     <img src="../../images/calibration/match_img.jpg" width="80%">
     <br>
-    <sup>多视角优化：将棋盘格放置在地面</sup>
+    <sup>多视角优化：将棋盘格举在手中进行移动，尽量使得3个相机能够同时看到</sup>
 </div>
 
 注意事项：
