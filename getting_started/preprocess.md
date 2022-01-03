@@ -113,5 +113,5 @@ python3 scripts/preprocess/extract_hand.py /nas/users/huangdi/MixCap/2021-10-09-
 选择数据集的部分帧，拷贝到新的目录：
 
 ```bash
-python3 scripts/preprocess/copy_dataset.py ${data} ${data}/../seq0-1700-2000 --start 1700 --end 2000 --step 1 --keys annots ball
+python3 scripts/preprocess/copy_dataset.py /path/to/src /path/to/dst --start num_start --end num_end --step num_step
 ```
