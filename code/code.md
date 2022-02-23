@@ -104,3 +104,25 @@ TODO:
 - [ ] MV1P for MANO
 - [ ] MV1P for two hands
 - [ ] MV1P for FLAME
+
+## 静止重建pipeline
+
+相机标定：
+{: .note }
+使用colmap进行相机标定
+
+人体重建: 重建身体+手
+
+```bash
+python3 apps/fit/triangulate1p.py --cfg_data config/data/mv1p.yml --opt_data args.path ${data} args.out ${data}/output-keypoints3d --cfg_exp config/recon/mv1p-total.yml
+cp -r ${data}/output-keypoints3d/keypoints3d ${data}
+```
+
+
+```mermaid
+sequenceDiagram
+    前端->>优化器: 输入数据
+    优化器->>后端: 初始化
+    优化器->>后端: 优化
+    优化器->>前端: 优化结果
+``` 
