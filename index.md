@@ -11,16 +11,9 @@ nav_order: 1
 
 
 
-<button type="button" name="button" class="btn" onclick="hello">Previous</button>
+<button type="button" name="button" class="btn" onclick="hello;">Previous</button>
 
 
 |name|preview|
 |:----:|:----:|
 |||
-
-<script>
-    function hello() {
-        console.log("hello");
-        alert("Hello World!");
-    }
-</script>
