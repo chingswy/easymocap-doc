@@ -8,10 +8,16 @@ nav_order: 1
 
 --------------------------------------------------------------------------------
 
+
+<script>
+    function hello() {
+        alert("Hello World!");
+    }
+</script>
+
+<button type="button" name="button" class="btn" onclick="hello">Previous</button>
+
+
 |name|preview|
 |:----:|:----:|
 |||
-
-<script>
-    
-</script>
