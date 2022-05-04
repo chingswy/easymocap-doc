@@ -11,11 +11,11 @@ parent: 实用工具
 {:toc}
 ---
 
-{% assign beatles = "John, Paul, George, Ringo" | split: ", " %}
 |name|val|
 |----|----|
-{% for member in beatles %}
+{% assign beatles = "John, Paul, George, Ringo, xxx" | split: ", " %}
+{% for member in beatles -%}
 |  {{ member }} | |
-{% endfor %}
+{% endfor -%}
 
 
