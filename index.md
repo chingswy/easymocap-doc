@@ -9,11 +9,7 @@ nav_order: 1
 --------------------------------------------------------------------------------
 
 
-<script>
-    function hello() {
-        alert("Hello World!");
-    }
-</script>
+
 
 <button type="button" name="button" class="btn" onclick="hello">Previous</button>
 
@@ -21,3 +17,10 @@ nav_order: 1
 |name|preview|
 |:----:|:----:|
 |||
+
+<script>
+    function hello() {
+        console.log("hello");
+        alert("Hello World!");
+    }
+</script>
