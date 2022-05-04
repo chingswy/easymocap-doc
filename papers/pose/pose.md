@@ -18,6 +18,7 @@ has_children: true
 - [Camera Distortion-aware 3D Human Pose Estimation in Videowith Optimization-based Meta-Learning](https://arxiv.org/pdf/2111.15056.pdf)
 - [ElePose: Unsupervised 3D Human Pose Estimation by Predicting Camera
 Elevation and Learning Normalizing Flows on 2D Poses](https://arxiv.org/pdf/2112.07088.pdf)
+- [TesseTrack: End-to-End Learnable Multi-Person Articulated 3D Pose Tracking](https://dineshreddy91.github.io/papers/TesseTrack.pdf)
 
 ## SMPL
 
@@ -29,6 +30,12 @@ Elevation and Learning Normalizing Flows on 2D Poses](https://arxiv.org/pdf/2112
 
 - [Local and Global Point Cloud Reconstruction for 3D Hand Pose Estimation](https://arxiv.org/pdf/2112.06389.pdf)
 - [Semi-Supervised 3D Hand Shape and PoseEstimation with Label Propagation](https://arxiv.org/pdf/2111.15199.pdf)
+- [Constraining Dense Hand Surface Tracking with Elasticity](https://scontent-hkt1-1.xx.fbcdn.net/v/t39.8562-6/10000000_1117938378951628_2483836343619479338_n.pdf?_nc_cat=108&ccb=1-5&_nc_sid=ad8a9d&_nc_ohc=zTK2O7WcWn8AX_hHyYC&_nc_ht=scontent-hkt1-1.xx&oh=00_AT8_pFN8rAP34x6Z8k6w66SMJzJwx9ssqwh-FQIyylcC6Q&oe=62136BFB)
+
+### dataset
+- [InterHand2.6M](https://www.ecva.net/papers/eccv_2020/papers_ECCV/papers/123650545.pdf)
+- [Capturing Hands in Action using Discriminative Salient Points and Physics Simulation](https://arxiv.org/pdf/1506.02178.pdf)
+
 ## Human-Object
 
 ### 2D
