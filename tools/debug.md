@@ -19,3 +19,16 @@ parent: 实用工具
 {% endfor -%}
 
 
+{% highlight javascript %}
+{% include alert_msg.js %}
+{% endhighlight %}
+
+
+<script type="text/javascript" charset="utf-8">
+$(document).ready(function(){
+    $("#submit").click(function(e){
+    {% include alert_msg.js %}
+    return false;
+    })
+});
+</script>
