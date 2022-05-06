@@ -24,6 +24,9 @@ parent: 实用工具
 {% endhighlight %}
 
 
+
+<button type="button" name="submit" class="btn">Button element</button>
+
 <script type="text/javascript" charset="utf-8">
 $(document).ready(function(){
     $("#submit").click(function(e){
