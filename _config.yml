@@ -8,7 +8,7 @@ highlighter: rouge
 logo: "images/logo_horizontal_color.png"
 
 plugins:
-  - jekyll-spaceship
+  - jekyll-spaceship # 暂时不支持这个插件
 
 jekyll-spaceship:
   # default enabled processors

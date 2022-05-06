@@ -22,13 +22,18 @@ This is the template of the paper list.
 - [Neural Head Avatars from Monocular RGB Videos](https://philgras.github.io/neural_head_avatars/neural_head_avatars.html)
 - [NeRS: Neural Reflectance Surfaces for Sparse-View 3D Reconstruction in the Wild](https://github.com/jasonyzhang/ners)
 
-
+- [Mixture of Volumetric Primitives for Efficient Neural Rendering](https://arxiv.org/pdf/2103.01954.pdf)
+  
 ## 人体相关
 
 - [HumanNeRF: Generalizable Neural Human Radiance Field from Sparse Inputs](https://arxiv.org/pdf/2112.02789.pdf)
 - [HVTR: Hybrid Volumetric-Textural Rendering for Human Avatars](https://arxiv.org/pdf/2112.10203.pdf)
 - [DD-NeRF: Double-Diffusion Neural Radiance Field as a Generalizable Implicit Body Representation](https://arxiv.org/pdf/2112.12390.pdf)
+- [NeuralFusion: Neural Volumetric Rendering under Human-object Interactions](https://arxiv.org/pdf/2202.12825.pdf): RGBD input
 
 ## 头发
 - [HVH: Learning a Hybrid Neural Volumetric Representation for Dynamic Hair Performance Capture](https://arxiv.org/pdf/2112.06904.pdf)
 - [Convolutional Neural Opacity Radiance Fields](https://arxiv.org/pdf/2104.01772.pdf)
+
+## 传统方法
+- [ACCURATE HUMAN BODY RECONSTRUCTION FOR VOLUMETRIC VIDEO](https://arxiv.org/pdf/2202.13118.pdf)

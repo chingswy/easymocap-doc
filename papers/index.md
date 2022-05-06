@@ -14,4 +14,9 @@ mathjax: true
 {:toc}
 ---
 
-$$V = T(\theta, \beta)$$
+- [awesome 3d human reconstruction](https://github.com/rlczddl/awesome-3d-human-reconstruction)
+- [Human Motion Capture](https://github.com/visonpon/human-motion-capture)
+
+## 论文笔记
+
+- [Structured Local Radiance Fields for Human Avatar Modeling](human/StrucNerf.md)

@@ -126,19 +126,3 @@ sequenceDiagram
     优化器->>后端: 优化
     优化器->>前端: 优化结果
 ``` 
-
-test youtube
-
-![](https://www.youtube.com/watch?v=Ptk_1Dc2iPY)
-
-test table
-
-|              Stage | Direct Products | ATP Yields |
-| -----------------: | --------------: | ---------: |
-|         Glycolysis |          2 ATP              ||
-| ^^                 |          2 NADH |   3--5 ATP |
-| Pyruvaye oxidation |          2 NADH |      5 ATP |
-|  Citric acid cycle |          2 ATP              ||
-| ^^                 |          6 NADH |     15 ATP |
-| ^^                 |          2 FADH |      3 ATP |
-|                               30--32 ATP        |||
