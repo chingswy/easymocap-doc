@@ -18,6 +18,7 @@ has_children: true
 - [Camera Distortion-aware 3D Human Pose Estimation in Videowith Optimization-based Meta-Learning](https://arxiv.org/pdf/2111.15056.pdf)
 - [ElePose: Unsupervised 3D Human Pose Estimation by Predicting Camera
 Elevation and Learning Normalizing Flows on 2D Poses](https://arxiv.org/pdf/2112.07088.pdf)
+- [TesseTrack: End-to-End Learnable Multi-Person Articulated 3D Pose Tracking](https://dineshreddy91.github.io/papers/TesseTrack.pdf)
 
 ## SMPL
 
