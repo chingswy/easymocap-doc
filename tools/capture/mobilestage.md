@@ -38,6 +38,13 @@ grand_parent: 实用工具
     └── videos -> ../../../xiaomi_test/20220511/160429/videos
 ```
 
+注意，不要直接把数据文件夹链接过来，正确的操作为
+
+```bash
+mkdir -p ba/videos && cd ba/videos
+ln /nas/dataset/xiaomi_test/<data>/<seq>/videos/* ./
+```
+
 ## 提取图片
 
 手机充电口朝右的时候拍摄的视频，使用`--transpose 2`参数将视频旋转正确。
