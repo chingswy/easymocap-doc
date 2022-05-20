@@ -15,6 +15,11 @@ nav_order: 2
 python3 setup.py develop
 ```
 
+打开方式：
+1. Linux下，使用`ssh -X`登录到服务器，在服务器运行代码。即可使用X server可视化
+2. Linux下，使用`sshfs`将远程目录挂载到本地，在本地运行代码，速度会比1更快
+3. Windows下使用VNC，在服务器开启虚拟桌面，在本地连接服务器的虚拟桌面，会比较卡
+
 1. TOC
 {:toc}
 ---

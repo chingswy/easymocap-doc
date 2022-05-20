@@ -39,3 +39,11 @@ python3 apps/calibration/calib_extri.py ${root}/ground1f --intri ${root}/ba/outp
 python3 apps/calibration/check_calib.py ${root}/ground1f --mode cube --out ${root}/ground1f --show --grid_step 0.1
 python3 apps/calibration/check_calib.py ${root}/ground1f --mode match --out ${root}/ground1f --show --grid_step 0.1
 ```
+
+使用人体关键点检查
+```bash
+python3 apps/preprocess/extract_keypoints.py ${root}/test --mode mp-holistic
+cp ${root}/ground1f/*.yml ${root}/test
+python3 apps/demo/mocap.py ${root}/test --mode halfh-3d --subs_vis 0
+vlc ${root}/test/output-halfh-3d/smplmesh.mp4
+```
