@@ -30,12 +30,18 @@ grand_parent: 实用工具
 ```bash
 <20220511>
 ├── ba
-│   └── videos -> ../../../xiaomi_test/20220511/160231/videos
+│   └── videos
 ├── background
+│   └── videos
 ├── ground
-│   └── videos -> ../../../xiaomi_test/20220511/155834/videos
+│   └── videos
+├── data0
+│   └── videos
+├── data1
+│   └── videos
+│   ...
 └── test
-    └── videos -> ../../../xiaomi_test/20220511/160429/videos
+    └── videos
 ```
 
 注意，不要直接把数据文件夹链接过来，正确的操作为
@@ -65,7 +71,7 @@ python3 apps/annotation/annot_mv_sync.py ${root}/ba
 
 ## colmap相机标定流程
 
-自动标定流程
+方法一：棋盘格自动标定
 
 ```bash
 # 自动检测
@@ -75,6 +81,8 @@ python3 apps/annotation/annot_calib.py ${root}/ground1f --annot chessboard --mod
 ```
 
 对于一个大一点的户外场景，这个办法通常不会奏效，需要手动标定棋盘格位置
+
+方法二：手动标定棋盘格
 
 ```bash
 colmap=<path/to/your/colmap>
@@ -92,6 +100,22 @@ python3 apps/calibration/align_colmap_ground.py ${out}/background1f_000000/spars
 python3 apps/calibration/check_calib.py ${root}/ground1f --mode cube --out ${out} --show --grid_step 0.66
 ```
 
+方法三：手动标定棋盘格+对齐场景重建
+
+```bash
+python3 apps/calibration/align_colmap_ground.py ${out}/sparse/0 ${out}/ --plane_by_chessboard ${root}/ground1f --prefix static/
+cp ${out}/*.yml ${data}
+```
+
+
+背景nerf
+```bash
+python3 apps/calibration/align_colmap_ground.py ${out}/sparse/0 ${out}/ --plane_by_chessboard ${root}/ground1f --prefix static/
+python3 apps/calibration/colmap2nerf.py ${out} ${out} ${root}
+cp -r ${root}/ground1f/sparse/scan ${root}/scan/sparse
+python3 apps/calibration/check_calib.py ${root}/scan --mode cube --out ${root}/scan --show
+```
+
 ## 相机标定
 
 主要操作:
@@ -105,8 +129,14 @@ python3 apps/calibration/check_calib.py ${root}/ground1f --mode cube --out ${out
 ## 重建
 
 ```bash
+root=/nas/dataset/XiaoMiMocap/20220518dance2
+python3 apps/annotation/annot_clip.py ${root}/data --mv
+# 手动标注，标注完成后进行拷贝
+python3 apps/annotation/annot_clip.py ${root}/data --mv --copy
+
 cp ${out}/*.yml ${data}
 
+python3 apps/demo/mocap.py ${data} --work mobilestage --exp smpl-3d --pids 0 1 2 --subs_vis VID_11 --subs VID_04 VID_05 VID_06 VID_08 VID_09 VID_10 VID_11 VID_12 VID_14 VID_15 VID_16 VID_17 VID_19 VID_20 VID_23 VID_24 VID_25 VID_29 VID_32 VID_33 VID_34 VID_35
 ```
 
 ## 附录
