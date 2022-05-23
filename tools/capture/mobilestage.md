@@ -68,6 +68,11 @@ python3 scripts/preprocess/copy_dataset.py ${root}/background ${root}/background
 python3 apps/annotation/annot_mv_sync.py ${root}/ba
 ```
 
+主要查看内容：
+1. 开始时打板是否同一帧
+2. 结束时的打板是否同一帧
+3. 不同序列之间不同步的相机是否固定
+
 
 ## colmap相机标定流程
 
@@ -111,7 +116,7 @@ cp ${out}/*.yml ${data}
 背景nerf
 ```bash
 python3 apps/calibration/align_colmap_ground.py ${out}/sparse/0 ${out}/ --plane_by_chessboard ${root}/ground1f --prefix static/
-python3 apps/calibration/colmap2nerf.py ${out} ${out} ${root}
+python3 apps/calibration/colmap2nerf.py ${out} --camera ${out} --out ${root}
 cp -r ${root}/ground1f/sparse/scan ${root}/scan/sparse
 python3 apps/calibration/check_calib.py ${root}/scan --mode cube --out ${root}/scan --show
 ```
