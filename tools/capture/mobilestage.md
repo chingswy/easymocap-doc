@@ -13,7 +13,7 @@ grand_parent: 实用工具
 - [ ] 记录当前时间、使用相机数目、ISO 
 - [ ] 采集空白背景
 - [ ] 采集标定板放在地上
-- [ ] 使用一个额外的手机，采集场景
+- [ ] 使用一个额外的手机，采集场景，采集时运动要慢一点，不然会有运动模糊
 - [ ] 采集运动数据
   - [ ] 开启手机
   - [ ] 打板
@@ -72,6 +72,49 @@ python3 apps/annotation/annot_mv_sync.py ${root}/ba
 1. 开始时打板是否同一帧
 2. 结束时的打板是否同一帧
 3. 不同序列之间不同步的相机是否固定
+
+
+## colmap标定：手动角点+场景扫描
+
+整理数据如下所示:
+
+```bash
+├── background1f # 存放背景的单帧的结果
+│   ├── images
+│   └── scan.mp4 # 存放扫描的视频
+└── ground1f # 存放放置棋盘格的结果
+    └── images 
+```
+
+**step0:** 创建棋盘格并手动标注
+
+```bash
+# 创建角点
+python3 apps/calibration/create_marker.py ${root}/ground1f --grid 0.66 0.48 --corner
+# 标注角点
+python3 apps/annotation/annot_calib.py ${root}/ground1f --annot chessboard --mode chessboard --pattern 2,2
+```
+
+**step1:** 同时标定scan数据和静止相机
+
+```bash
+# 使用colmap标定相机
+python3 apps/calibration/calib_static_dynamic_by_colmap.py ${root}/background1f ${root}/colmap --colmap ${colmap} --num 400
+# 对齐相机
+python3 apps/calibration/align_colmap_ground.py ${root}/colmap/sparse/0 ${root}/colmap/align --plane_by_chessboard ${root}/ground1f --prefix static/
+# 转换相机
+python3 apps/calibration/colmap2nerf.py ${root}/colmap --camera ${root}/colmap/align --out ${root}/scan4nerf
+# 检查相机
+python3 apps/calibration/check_calib.py ${root}/scan4nerf/scan --mode cube --out ${root}/scan4nerf/scan --show
+```
+
+**step2:** 训练NeRF
+
+```bash
+# 检查背景mask
+python3 apps/annotation/annot_mask.py ${root}/background1f --mask mask-background --static
+```
+
 
 
 ## colmap相机标定流程
