@@ -47,7 +47,7 @@ python3 apps/annotation/annot_calib.py ${root}/ground1f --annot chessboard --mod
 ```
 
 <div align="center">
-    <img src="assets/chessboard4.png" width="40%">
+    <img src="capture/assets/chessboard4.png" width="40%">
     <br>
     <sup>棋盘格不是中心对称的，标注的时候与示例对应。依次为右上角，左上角，左下角，右下角</sup>
 </div>
