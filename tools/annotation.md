@@ -28,6 +28,38 @@ python3 setup.py develop
 
 - [ ] 实现一个bbox，然后进行放大的需求
 
+
+## 棋盘格角点标注
+
+这个用于户外的数据，自动检测棋盘格的结果非常不可靠，不如直接手动标注棋盘格的四个角点。
+
+首先要创建角点，参数为棋盘格的边长，实验室的标定板是 0.9 0.6。
+
+```bash
+python3 apps/calibration/create_marker.py ${root}/ground1f --grid 0.9 0.6 --corner
+python3 apps/calibration/create_marker.py ${root}/ground1f --grid 0.66 0.48 --corner
+```
+
+其次要标注角点
+
+```bash
+python3 apps/annotation/annot_calib.py ${root}/ground1f --annot chessboard --mode chessboard --pattern 2,2
+```
+
+<div align="center">
+    <img src="assets/chessboard4.png" width="40%">
+    <br>
+    <sup>棋盘格不是中心对称的，标注的时候与示例对应。依次为右上角，左上角，左下角，右下角</sup>
+</div>
+
+标注过程：
+
+1. 鼠标中键进行放大缩小，可以放大到像素级
+2. 鼠标左键点击角点，如果点错了可多次点
+3. 空格键确认当前点，标注下一个点
+4. 标注完所有点之后，`q`退出当前视角，在终端输入`y`保存。切换到下一个视角
+5. 不一定所有视角都要标
+
 ## 关键点标注
 
 ```bash
@@ -77,28 +109,6 @@ python3 apps/annotation/annot_track.py ${data} --annot basketball --max_person 1
 
 ## 标注背景的mask
 
-
-
-## 多视角同步
-
-需求：
-- 多个窗口一起移动
-- 单个窗口选中之后可以单独移动
-- 记录关键帧
-- 保存关键帧
-
-1. 标注多视角的同步（使用场记板）
-
-```bash
-python3 apps/annotation/annot_mv_sync.py ${data}
-```
-
-- 鼠标点击选中视角，`x`取消选中
-- `wasd`：选中视角时，用于切换当前视角的帧；不选中视角时，同步切换所有视角的帧
-- `r`：记录当前的关键帧
-- `f`：快速切换到同步的帧
-
-2. 导出数据
 
 ## 多视角匹配点标注
 
