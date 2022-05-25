@@ -98,6 +98,12 @@ python3 apps/calibration/create_marker.py ${root}/ground1f --grid 0.66 0.48 --co
 python3 apps/annotation/annot_calib.py ${root}/ground1f --annot chessboard --mode chessboard --pattern 2,2
 ```
 
+<div align="center">
+    <img src="assets/chessboard4.png" width="40%">
+    <br>
+    <sup>棋盘格不是中心对称的，标注的时候与示例对应。依次为右上角，左上角，左下角，右下角</sup>
+</div>
+
 **step1:** 同时标定scan数据和静止相机
 
 ```bash
