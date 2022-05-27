@@ -33,11 +33,11 @@ python3 setup.py develop
 
 这个用于户外的数据，自动检测棋盘格的结果非常不可靠，不如直接手动标注棋盘格的四个角点。
 
-首先要创建角点，参数为棋盘格的边长，实验室的标定板是 0.9 0.6。
+首先要创建角点，参数为棋盘格的边长x格子数，实验室的标定板是`0.8 0.5`，公司的标定板是`0.6 0.42`
 
 ```bash
-python3 apps/calibration/create_marker.py ${root}/ground1f --grid 0.9 0.6 --corner
-python3 apps/calibration/create_marker.py ${root}/ground1f --grid 0.66 0.48 --corner
+python3 apps/calibration/create_marker.py ${root}/ground1f --grid 0.8 0.5 --corner
+python3 apps/calibration/create_marker.py ${root}/ground1f --grid 0.6 0.42 --corner
 ```
 
 其次要标注角点
@@ -49,7 +49,7 @@ python3 apps/annotation/annot_calib.py ${root}/ground1f --annot chessboard --mod
 <div align="center">
     <img src="capture/assets/chessboard4.png" width="40%">
     <br>
-    <sup>棋盘格不是中心对称的，标注的时候与示例对应。依次为右上角，左上角，左下角，右下角</sup>
+    <sup>棋盘格不是中心对称的，标注的时候与示例对应，第一个点需要在角落为黑色的一侧。依次为右上角，左上角，左下角，右下角</sup>
 </div>
 
 标注过程：

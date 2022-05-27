@@ -76,6 +76,88 @@ python3 apps/annotation/annot_mv_sync.py ${root}/ba
 2. 结束时的打板是否同一帧
 3. 不同序列之间不同步的相机是否固定
 
+## 棋盘格标定：移动棋盘格标定内参+静止帧标定外参
+
+这个方法适用于室内小场景，视角密集的情况。整理数据如下所示
+```bash
+<root>
+├── ba # 存放棋盘格移动着标定相机的结果
+│   └── images 
+└── ground1f # 存放放置棋盘格的结果
+    └── images 
+```
+
+
+**step0:** 自动检测棋盘格：
+
+```bash
+root=<path/to/root>
+# 检测棋盘格
+python3 apps/calibration/detect_chessboard.py ${root}/ground1f --out ${root}/ground1f/output --pattern 11,8 --grid 0.06
+python3 apps/calibration/detect_chessboard.py ${root}/ba --out ${root}/ba/output --pattern 11,8 --grid 0.06 --seq --max_step 32 --min_step 8
+# 检查棋盘格
+python3 apps/annotation/annot_calib.py ${root}/ground1f --annot chessboard --mode chessboard --pattern 11,8
+# 标定相机内参
+python3 apps/calibration/calib_intri.py ${root}/ba --num 200 --share_intri
+# 标定相机外参
+python3 apps/calibration/calib_extri.py ${root}/ground1f --intri ${root}/ba/output/intri.yml
+# 检查相机外参
+python3 apps/calibration/check_calib.py ${root}/ground1f --mode match --out ${root}/ground1f --show --grid_step 0.42 --annot chessboard
+```
+
+正常情况对于`1920x1080`的图片，这里的误差需要小于`1 pixel`。
+
+## 棋盘格标定：移动棋盘格标定内参+静止帧标定外参+移动棋盘格进行BA
+
+这个方法通常可以获得更高的精度，前提是需要多相机同步性能较好。
+
+
+## colmap标定：colmap静止背景+静止棋盘格
+
+这个方法适用于室内小场景，视角密集的情况。整理数据如下所示
+
+
+```bash
+├── background1f # 存放背景的单帧的结果
+│   └── images 
+└── ground1f # 存放放置棋盘格的结果
+    └── images 
+```
+
+**step0:** 自动检测棋盘格：
+
+```bash
+root=<path/to/root>
+# 检测棋盘格
+python3 apps/calibration/detect_chessboard.py ${root}/ground1f --out ${root}/ground1f/output --pattern 11,8 --grid 0.06
+# 检查棋盘格
+python3 apps/annotation/annot_calib.py ${root}/ground1f --annot chessboard --mode chessboard --pattern 11,8
+```
+
+
+
+**step1:** colmap标定背景帧：
+
+```bash
+colmap=<path/to/colmap>
+# 使用colmap标定
+python3 apps/calibration/calib_by_colmap.py ${root}/background1f ${root}/colmap --no_camera --share_camera --colmap ${colmap}
+# 可视化检查结果
+$colmap gui --database_path ${root}/colmap/background1f_000000/database.db --image_path ${root}/colmap/background1f_000000/images --import_path ${root}/colmap/background1f_000000/sparse/0
+# 读取colmap参数
+python3 apps/calibration/read_colmap.py ${root}/colmap/background1f_000000/sparse/0 .bin
+# 对齐colmap结果
+python3 apps/calibration/align_colmap_ground.py ${root}/colmap/background1f_000000/sparse/0 ${root}/colmap/align --plane_by_chessboard ${root}/ground1f
+# 可视化检查对齐后的相机外参
+python3 apps/calibration/check_calib.py ${root}/ground1f --mode cube --out ${root}/colmap/align --show --grid_step 0.42
+# 定量检查外参
+python3 apps/calibration/check_calib.py ${root}/ground1f --mode match --out ${root}/colmap/align --show --grid_step 0.42 --annot chessboard
+```
+
+最后一步检查中，如果相机误差超过 1pixel(1000pixel的图片)，通常被认为是误差过大。
+检查colmap重建的点云质量，通常这种情况标定误差大是因为点云质量差。需要换用其他标定方法。
+如果点云质量很好，标定结果误差大，可能是拍的棋盘格不同步，需要重新拍摄。
+
 
 ## colmap标定：手动角点+场景扫描
 
@@ -93,7 +175,7 @@ python3 apps/annotation/annot_mv_sync.py ${root}/ba
 
 ```bash
 # 创建角点
-python3 apps/calibration/create_marker.py ${root}/ground1f --grid 0.66 0.48 --corner
+python3 apps/calibration/create_marker.py ${root}/ground1f --grid 0.6 0.42 --corner
 # 标注角点
 python3 apps/annotation/annot_calib.py ${root}/ground1f --annot chessboard --mode chessboard --pattern 2,2
 ```
@@ -115,6 +197,10 @@ python3 apps/calibration/align_colmap_ground.py ${root}/colmap/sparse/0 ${root}/
 python3 apps/calibration/colmap2nerf.py ${root}/colmap --camera ${root}/colmap/align --out ${root}/scan4nerf
 # 检查相机
 python3 apps/calibration/check_calib.py ${root}/scan4nerf/scan --mode cube --out ${root}/scan4nerf/scan --show
+# 拷贝相机参数
+cp ${root}/scan4nerf/background1f/*.yml ${root}
+cp ${root}/scan4nerf/background1f/*.yml ${root}/background1f
+
 ```
 
 **step2:** 训练NeRF
@@ -122,6 +208,10 @@ python3 apps/calibration/check_calib.py ${root}/scan4nerf/scan --mode cube --out
 ```bash
 # 检查背景mask
 python3 apps/annotation/annot_mask.py ${root}/background1f --mask mask-background --static
+# 检查背景的光照
+python3 apps/annotation/annot_mv_sync.py ${root}/background1f --scale 0.3
+# 训练背景NeRF
+python3 apps/neuralbody/demo.py ${data} --mode danceroom-background --gpus 4,5,6,7
 ```
 
 
