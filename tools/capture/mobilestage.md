@@ -175,7 +175,7 @@ python3 apps/calibration/check_calib.py ${root}/ground1f --mode match --out ${ro
 
 ```bash
 # 创建角点
-python3 apps/calibration/create_marker.py ${root}/ground1f --grid 0.6 0.42 --corner
+python3 apps/calibration/create_marker.py ${root}/ground1f --grid 0.6 0.42 --corner --overwrite
 # 标注角点
 python3 apps/annotation/annot_calib.py ${root}/ground1f --annot chessboard --mode chessboard --pattern 2,2
 ```
@@ -196,8 +196,10 @@ python3 apps/calibration/align_colmap_ground.py ${root}/colmap/sparse/0 ${root}/
 # 转换相机
 python3 apps/calibration/colmap2nerf.py ${root}/colmap --camera ${root}/colmap/align --out ${root}/scan4nerf
 # 检查相机
+python3 apps/calibration/check_calib.py ${root}/ground1f --mode cube --out ${root}/scan4nerf/background1f --show --grid_step 0.6
 python3 apps/calibration/check_calib.py ${root}/scan4nerf/scan --mode cube --out ${root}/scan4nerf/scan --show
-# 拷贝相机参数
+python3 apps/calibration/check_calib.py ${root}/ground1f --mode match --out ${root}/scan4nerf/background1f --show --grid_step 0.6 --print3d --annot chessboard
+# 确认相机参数没问题；拷贝相机参数
 cp ${root}/scan4nerf/background1f/*.yml ${root}
 cp ${root}/scan4nerf/background1f/*.yml ${root}/background1f
 
@@ -214,54 +216,11 @@ python3 apps/annotation/annot_mv_sync.py ${root}/background1f --scale 0.3
 python3 apps/neuralbody/demo.py ${data} --mode danceroom-background --gpus 4,5,6,7
 ```
 
-
-
-## colmap相机标定流程
-
-方法一：棋盘格自动标定
-
+**额外标注**：背景
 ```bash
-# 自动检测
-python3 apps/calibration/detect_chessboard.py ${root}/ground1f --out ${root}/ground1f/output --pattern 11,8 --grid 0.06
-# 确认
-python3 apps/annotation/annot_calib.py ${root}/ground1f --annot chessboard --mode chessboard --pattern 11,8
+
 ```
 
-对于一个大一点的户外场景，这个办法通常不会奏效，需要手动标定棋盘格位置
-
-方法二：手动标定棋盘格
-
-```bash
-colmap=<path/to/your/colmap>
-# 使用colmap标定，这一步需要dense重建，可能比较久
-python3 apps/calibration/calib_by_colmap.py ${root}/background1f ${out} --no_camera --share_camera --colmap ${colmap}
-# 检查colmap的输出
-$colmap gui --database_path ${out}/background1f_000000/database.db --image_path ${out}/background1f_000000/images
-# 创建一个空的角点坐标
-python3 apps/calibration/create_marker.py ${root}/ground1f --grid 0.66 0.48 --corner
-# 标注角点
-python3 apps/annotation/annot_calib.py ${root}/ground1f --annot chessboard --mode chessboard --pattern 2,2
-# 对齐colmap的输出
-python3 apps/calibration/align_colmap_ground.py ${out}/background1f_000000/sparse/0 ${out}/ --plane_by_chessboard ${root}/ground1f
-# 检查输出
-python3 apps/calibration/check_calib.py ${root}/ground1f --mode cube --out ${out} --show --grid_step 0.66
-```
-
-方法三：手动标定棋盘格+对齐场景重建
-
-```bash
-python3 apps/calibration/align_colmap_ground.py ${out}/sparse/0 ${out}/ --plane_by_chessboard ${root}/ground1f --prefix static/
-cp ${out}/*.yml ${data}
-```
-
-
-背景nerf
-```bash
-python3 apps/calibration/align_colmap_ground.py ${out}/sparse/0 ${out}/ --plane_by_chessboard ${root}/ground1f --prefix static/
-python3 apps/calibration/colmap2nerf.py ${out} --camera ${out} --out ${root}
-cp -r ${root}/ground1f/sparse/scan ${root}/scan/sparse
-python3 apps/calibration/check_calib.py ${root}/scan --mode cube --out ${root}/scan --show
-```
 
 ## 相机标定
 
