@@ -170,15 +170,21 @@ python3 apps/annotation/copy_mv_sync.py ${data} --out ${data}/../actor2-sync
 
 ### 选择数据clip
 
+在完成`copy_mv_sync.py`之后，数据会被拷贝到不同的同步片段里面，对于每一个片段，需要选择要用的数据进行截取。多视角的数据只需要标注一个视角就可以了。
+
 截取片段：
 
 截取动作开始到结尾的部分
 
+```
 python3 apps/annotation/annot_clip.py ${data} --mv
+```
 
-复制图片
+标注完成之后复制图片，数据会根据起始帧用结束帧拷贝到不同目录
 
+```
 python3 apps/annotation/annot_clip.py ${data} --mv --copy
+```
 
 ### 键盘操作
 

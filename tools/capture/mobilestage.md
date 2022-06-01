@@ -111,6 +111,13 @@ python3 apps/calibration/check_calib.py ${root}/ground1f --mode match --out ${ro
 
 这个方法通常可以获得更高的精度，前提是需要多相机同步性能较好。
 
+标定方案选择：
+
+- 密集视角+室内 => colmap静止背景标定+静止棋盘格对齐
+-   上面不work => colmapN帧包含人的数据同时标定+静止棋盘格对齐
+
+{: .warning }
+colmap使用的版本为3.6，已知使用3.8会有数据格式不一致的问题
 
 ## colmap标定：colmap静止背景+静止棋盘格
 
@@ -152,6 +159,13 @@ python3 apps/calibration/align_colmap_ground.py ${root}/colmap/background1f_0000
 python3 apps/calibration/check_calib.py ${root}/ground1f --mode cube --out ${root}/colmap/align --show --grid_step 0.42
 # 定量检查外参
 python3 apps/calibration/check_calib.py ${root}/ground1f --mode match --out ${root}/colmap/align --show --grid_step 0.42 --annot chessboard
+```
+
+**（可选）使用人体关键点检查**
+
+```bash
+python3 apps/preprocess/extract_keypoints.py ${root}/human1f --mode mp-holistic
+python3 apps/calibration/check_calib.py ${root}/human1f --mode human --out ${root}/colmap/align --write --show --annot annots --hand
 ```
 
 最后一步检查中，如果相机误差超过 1pixel(1000pixel的图片)，通常被认为是误差过大。
@@ -202,7 +216,6 @@ python3 apps/calibration/check_calib.py ${root}/ground1f --mode match --out ${ro
 # 确认相机参数没问题；拷贝相机参数
 cp ${root}/scan4nerf/background1f/*.yml ${root}
 cp ${root}/scan4nerf/background1f/*.yml ${root}/background1f
-
 ```
 
 **step2:** 训练NeRF
@@ -216,7 +229,8 @@ python3 apps/annotation/annot_mv_sync.py ${root}/background1f --scale 0.3
 python3 apps/neuralbody/demo.py ${data} --mode danceroom-background --gpus 4,5,6,7
 ```
 
-**额外标注**：背景
+**额外标注**：背景中的物体
+
 ```bash
 
 ```
@@ -241,8 +255,10 @@ python3 apps/annotation/annot_clip.py ${root}/data --mv
 python3 apps/annotation/annot_clip.py ${root}/data --mv --copy
 
 cp ${out}/*.yml ${data}
-
+# multiview fitting
 python3 apps/demo/mocap.py ${data} --work mobilestage --exp smpl-3d --pids 0 1 2 --subs_vis VID_11 --subs VID_04 VID_05 VID_06 VID_08 VID_09 VID_10 VID_11 VID_12 VID_14 VID_15 VID_16 VID_17 VID_19 VID_20 VID_23 VID_24 VID_25 VID_29 VID_32 VID_33 VID_34 VID_35
+# extract hand from 3d keypoints
+python3 apps/preprocess/extract_hand_from_3d.py ${data} --k2d ${data}/output-keypoints3d/keypoints2d --k3d ${data}/output-keypoints3d/keypoints3d --out ${data}/output-keypoints3d/keypoints2d-hand
 ```
 
 ## 附录
